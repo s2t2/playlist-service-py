@@ -32,27 +32,13 @@ Automatically "synchronizing" the user's music preferences across services will 
 
 ### System Objectives
 
-The system's primary objective is to perform a one-directional sync of playlist information from the Pandora service to the Spotify service. By doing so, the system should provide value to the user in the form of time savings and improved music listening experience.
+The system's primary objective is to perform a **one-directional sync of playlist information from the Pandora service to the Spotify service**. By doing so, the system should provide value to the user in the form of time savings and improved music listening experience.
 
 ### User Experience Requirements
 
 Ultimately, the user should be able to continue to use the Pandora and Spotify music services as usual, without any additional interactions, interruptions, or disruptions.
 
 Additionally, the user should see a Spotify playlist which contains all songs recently bookmarked on Pandora. Existence of this playlist and accuracy of its song contents will lead to an improved listening experience.
-
-### Information Requirements
-
-Data Flow Diagram:
-
-![a sketch of a data flow diagram, depicting a system icon in the middle, with information flows from the Pandora service into the system, and information outflows from the system to Spotify service](/planning/dfd-sketch.jpg)
-
-Information Inputs:
-
-  + Bookmarked Songs List (a list of songs I've "bookmarked" on Pandora)
-
-Information Outputs:
-
-  + Playlist Update Request (a request to add songs to a Spotify playlist)
 
 ### Functionality Requirements (Features)
 
@@ -72,6 +58,20 @@ On a scheduled or ad-hoc basis, the system should automatically add the bookmark
 > NICE TO HAVE: The system should send me email with the results of its playlist update attempts. It should report on whether or not it was successful, and if successful it should say which songs it has added to the playlist.
 
 The user should be able to see their favorite songs in the designated Spotify playlist, so they can continue listening.
+
+### Information Requirements
+
+Data Flow Diagram:
+
+![a sketch of a data flow diagram, depicting a system icon in the middle, with information flows from the Pandora service into the system, and information outflows from the system to Spotify service](/planning/dfd-sketch.jpg)
+
+Information Inputs:
+
+  + Bookmarked Songs List (a list of songs I've "bookmarked" on Pandora)
+
+Information Outputs:
+
+  + Playlist Update Request (a request to add songs to a Spotify playlist)
 
 ### User Interface Requirements
 
