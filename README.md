@@ -1,6 +1,6 @@
 # Playlist Synchronization Service (Python)
 
-Adds my "bookmarked" Pandora songs to a corresponding playlist on Spotify.
+Adds my "bookmarked" [Pandora](https://www.pandora.com) songs to a corresponding playlist on [Spotify](https://www.spotify.com).
 
 ## [Requirements](/planning/requirements.md)
 
