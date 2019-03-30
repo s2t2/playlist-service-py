@@ -71,7 +71,7 @@ On a scheduled or ad-hoc basis, the system should automatically add the bookmark
 
 > NICE TO HAVE: The system should send me email with the results of its playlist update attempts. It should report on whether or not it was successful, and if successful it should say which songs it has added to the playlist.
 
-The user should be able to see their favorite songs in the designated Spotify playlist, so they can continue listening.
+The user should be able to see their bookmarked songs in the designated Spotify playlist, so they can continue listening.
 
 
 
@@ -102,10 +102,10 @@ In the future, perhaps the scope will expand to allow users to also access the a
 
 The system's software should be able to be installed onto a personal computer (i.e. "development" environment), and/or a Heroku application server (i.e. "production" environment). The production environment should have the capability to execute Python scripts at scheduled intervals.
 
-#### Software Requirements
-
-The system requires installation of Python 3.7 and various third-party Python packages.
-
 #### Network Requirements
 
 The system requires an Internet connection to facilitate the programmatic communication of data between the Pandora and Spotify APIs over the HTTP / HTTPS protocol.
+
+#### Software Requirements
+
+The system requires installation of Python 3.7 and various third-party Python packages.
