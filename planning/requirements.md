@@ -67,11 +67,11 @@ On a scheduled or ad-hoc basis, the system should automatically get a list of th
 
 #### Playlist Updating
 
-The system should automatically add a user's Pandora bookmarks to a Spotify playlist called "Pandora Bookmarks".
+On a scheduled or ad-hoc basis, the system should automatically add the bookmarked songs to a Spotify playlist called "Pandora Bookmarks".
 
 > NICE TO HAVE: The system should send me email with the results of its playlist update attempts. It should report on whether or not it was successful, and if successful it should say which songs it has added to the playlist.
 
-The user should be able to see their favorite songs in the designated Spotify playlist so they can continue listening.
+The user should be able to see their favorite songs in the designated Spotify playlist, so they can continue listening.
 
 ### User Interface Requirements
 
