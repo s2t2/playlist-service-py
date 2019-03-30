@@ -12,7 +12,7 @@
 
 ### Information Outputs
 
-  + **Playlist Update**: adding bookmarked songs to a playlist on Spotify
+  + **Playlist Update Request**: a request to add bookmarked songs to a playlist on Spotify
 
 ## Functionality Requirements
 
