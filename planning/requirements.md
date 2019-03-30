@@ -28,7 +28,7 @@ The proposed solution is called the "Playlist Sync Service" because it will seam
 
 ### Hypothesis
 
-Automatically "synchronizing" the user's music preferences across services will provide the user with a better listening experience overall, and will save the user time it would have otherwise taken to manually update playlists on each of the various services.
+Automatically "synchronizing" the user's music preferences across services will provide the user with a better listening experience overall, and will save the user time it would have otherwise taken to manually update playlists on the other service(s).
 
 ### System Objectives
 
@@ -39,6 +39,20 @@ The system's primary objective is to perform a **one-directional sync of playlis
 Ultimately, the user should be able to continue to use the Pandora and Spotify music services as usual, without any additional interactions, interruptions, or disruptions.
 
 Additionally, the user should see a Spotify playlist which contains all songs recently bookmarked on Pandora. Existence of this playlist and accuracy of its song contents will lead to an improved listening experience.
+
+### Information Requirements
+
+Data Flow Diagram:
+
+![a sketch of a data flow diagram, depicting a system icon in the middle, with information flows from the Pandora service into the system, and information outflows from the system to Spotify service](/planning/dfd-sketch.jpg)
+
+Information Inputs:
+
+  + Bookmarked Songs List (a list of songs I've "bookmarked" on Pandora)
+
+Information Outputs:
+
+  + Playlist Update Request (a request to add songs to a Spotify playlist)
 
 ### Functionality Requirements (Features)
 
@@ -59,19 +73,10 @@ On a scheduled or ad-hoc basis, the system should automatically add the bookmark
 
 The user should be able to see their favorite songs in the designated Spotify playlist, so they can continue listening.
 
-### Information Requirements
 
-Data Flow Diagram:
 
-![a sketch of a data flow diagram, depicting a system icon in the middle, with information flows from the Pandora service into the system, and information outflows from the system to Spotify service](/planning/dfd-sketch.jpg)
 
-Information Inputs:
 
-  + Bookmarked Songs List (a list of songs I've "bookmarked" on Pandora)
-
-Information Outputs:
-
-  + Playlist Update Request (a request to add songs to a Spotify playlist)
 
 ### User Interface Requirements
 
@@ -79,10 +84,28 @@ For now, users will interface with the application through a command-line interf
 
 In the future, perhaps the scope will expand to allow users to also access the application through a GUI web interface.
 
+
+
+
+
+
+
+
+
+
+
+
+
 ### Technology Requirements
 
-The application can be installed and run on a personal computer (i.e. "development" environment), or a Heroku application server (i.e. "production" environment).
+#### Hardware Requirements
 
-Regardless of the operating environment, the computer should allow installation of Python 3.7 and various third-party Python packages. The computer should also have an Internet connection to facilitate the programmatic communication HTTP access to the Pandora and Spotify APIs.
+The system's software should be able to be installed onto a personal computer (i.e. "development" environment), and/or a Heroku application server (i.e. "production" environment). The production environment should have the capability to execute Python scripts at scheduled intervals.
 
-The production environment should have scheduling capabilities to execute Python scripts at specified intervals.
+#### Software Requirements
+
+The system requires installation of Python 3.7 and various third-party Python packages.
+
+#### Network Requirements
+
+The system requires an Internet connection to facilitate the programmatic communication of data between the Pandora and Spotify APIs over the HTTP / HTTPS protocol.
