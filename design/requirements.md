@@ -2,6 +2,10 @@
 
 ## Information Requirements
 
+### Data Flow Diagram
+
+![a sketch of a data flow diagram, depicting a system icon in the middle, with information flows from the Pandora service into the system, and information outflows from the system to Spotify service](/design/dfd-sketch.jpg)
+
 ### Information Inputs
 
   + **Bookmarked Songs List**: a list of songs I've "bookmarked" on Pandora
