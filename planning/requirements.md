@@ -26,19 +26,19 @@ TODO
 
 The proposed solution is called the "Playlist Sync Service" because it will seamlessly automate the process of updating the user's song playlists across multiple music services (i.e. [Pandora](https://www.pandora.com) and [Spotify](https://www.spotify.com)).
 
-### Hypothesis
-
-Automatically "synchronizing" my music preferences across services will provide me with a better listening experience overall, and will save me time it would have otherwise taken to manually update playlists across various music services.
-
-### System Objectives
-
-The system's primary objective is to perform a one-directional sync of playlist information from the Pandora service to the Spotify service. By doing so, the system should provide value to the user in the form of **time savings** and **improved music listening experience**.
-
-### User Experience Requirements
+## User Experience Requirements
 
 Ultimately, the user should be able to continue to use the Pandora and Spotify music services as usual, without any additional interactions, interruptions, or disruptions.
 
 Additionally, the user should also see a Spotify playlist which contains all songs recently bookmarked on Pandora. Existence of this playlist and accuracy of its song contents will lead directly to an improved listening experience.
+
+### Hypothesis
+
+Automatically "synchronizing" the user's music preferences across services will provide the user with a better listening experience overall, and will save the user time it would have otherwise taken to manually update playlists on each of the various services.
+
+### System Objectives
+
+The system's primary objective is to perform a one-directional sync of playlist information from the Pandora service to the Spotify service. By doing so, the system should provide value to the user in the form of time savings and improved music listening experience.
 
 ### Information Requirements
 
@@ -48,13 +48,13 @@ Data Flow Diagram:
 
 Information Inputs:
 
-  + **Bookmarked Songs List** (a list of songs I've "bookmarked" on Pandora)
+  + Bookmarked Songs List (a list of songs I've "bookmarked" on Pandora)
 
 Information Outputs:
 
-  + **Playlist Update Request** (a request to add bookmarked songs to a playlist on Spotify)
+  + Playlist Update Request (a request to add songs to a Spotify playlist)
 
-### System Requirements / Features
+### Functionality Requirements (Features)
 
   1. Bookmark Retrieval
   2. Playlist Updating
