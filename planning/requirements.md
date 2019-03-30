@@ -26,12 +26,6 @@ TODO
 
 The proposed solution is called the "Playlist Sync Service" because it will seamlessly automate the process of updating the user's song playlists across multiple music services (i.e. [Pandora](https://www.pandora.com) and [Spotify](https://www.spotify.com)).
 
-## User Experience Requirements
-
-Ultimately, the user should be able to continue to use the Pandora and Spotify music services as usual, without any additional interactions, interruptions, or disruptions.
-
-Additionally, the user should also see a Spotify playlist which contains all songs recently bookmarked on Pandora. Existence of this playlist and accuracy of its song contents will lead directly to an improved listening experience.
-
 ### Hypothesis
 
 Automatically "synchronizing" the user's music preferences across services will provide the user with a better listening experience overall, and will save the user time it would have otherwise taken to manually update playlists on each of the various services.
@@ -39,6 +33,12 @@ Automatically "synchronizing" the user's music preferences across services will 
 ### System Objectives
 
 The system's primary objective is to perform a one-directional sync of playlist information from the Pandora service to the Spotify service. By doing so, the system should provide value to the user in the form of time savings and improved music listening experience.
+
+### User Experience Requirements
+
+Ultimately, the user should be able to continue to use the Pandora and Spotify music services as usual, without any additional interactions, interruptions, or disruptions.
+
+Additionally, the user should see a Spotify playlist which contains all songs recently bookmarked on Pandora. Existence of this playlist and accuracy of its song contents will lead to an improved listening experience.
 
 ### Information Requirements
 
@@ -61,21 +61,21 @@ Information Outputs:
 
 #### Bookmark Retrieval
 
-The **user should** be able to continue to "bookmark" their favorite songs in Pandora, as usual, without interruption.
+The user should be able to continue to "bookmark" their favorite songs in Pandora, as usual, without interruption.
 
-On a scheduled or ad-hoc basis, the **system should** automatically get a list of the user's bookmarked songs from Pandora.
+On a scheduled or ad-hoc basis, the system should automatically get a list of the user's bookmarked songs from Pandora.
 
 #### Playlist Updating
 
-The **system should** automatically add a user's Pandora bookmarks to a Spotify playlist called "Pandora Bookmarks".
+The system should automatically add a user's Pandora bookmarks to a Spotify playlist called "Pandora Bookmarks".
 
-> NICE TO HAVE: The **system should** send me email with the results of its playlist update attempts. It should report on whether or not it was successful, and if successful it should say which songs it has added to the playlist.
+> NICE TO HAVE: The system should send me email with the results of its playlist update attempts. It should report on whether or not it was successful, and if successful it should say which songs it has added to the playlist.
 
-The **user should** be able to see their favorite songs in the designated Spotify playlist so they can continue listening.
+The user should be able to see their favorite songs in the designated Spotify playlist so they can continue listening.
 
 ### User Interface Requirements
 
-For now, users will interface with the application through a **command-line interface (CLI)**.
+For now, users will interface with the application through a command-line interface (CLI).
 
 In the future, perhaps the scope will expand to allow users to also access the application through a GUI web interface.
 
