@@ -3,8 +3,15 @@
 # https://6xq.net/pandora-apidoc/json/partners/#partners
 # https://github.com/mcrute/pydora/blob/f6d1613deb7ec23d38b3d7d2c20b065f3457c8b8/pandora/clientbuilder.py#L77-L114
 # https://github.com/mcrute/pydora/blob/f6d1613deb7ec23d38b3d7d2c20b065f3457c8b8/pandora/transport.py#L27
+# https://github.com/mcrute/pydora/blob/f6d1613deb7ec23d38b3d7d2c20b065f3457c8b8/pandora/errors.py
 
-import pydora.pandora.clientbuilder as cb
+import os
+import pprint
+import pydora # source of "pandora" sub-package
+#from pandora.client import APIClient
+import pandora.clientbuilder as cb
+
+pp = pprint.PrettyPrinter(indent=4)
 
 PANDORA_USERNAME = os.environ.get("PANDORA_USERNAME", "OOPS")
 PANDORA_PASSWORD = os.environ.get("PANDORA_PASSWORD", "OOPS")
@@ -36,9 +43,10 @@ client_settings = {
 }
 
 settings = client_settings["android"]
-client = cb.SettingsDictBuilder(settings).build()
 
-breakpoint()
+client = cb.SettingsDictBuilder(settings).build() #> <class 'pandora.client.APIClient'>
 
-client.login("username", "password")
+pp.pprint(dir(client))
+
+client.login("username", "password") #> invalid partner login
 #client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
