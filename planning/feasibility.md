@@ -52,3 +52,16 @@ Looking at parts of pydora again:
   + https://github.com/mcrute/pydora/blob/9e49c086a86deff4ae85d802e9d57278f1ac4636/pandora/client.py#L160-L164
   + https://github.com/mcrute/pydora/blob/9e49c086a86deff4ae85d802e9d57278f1ac4636/pandora/models/pandora.py#L366-L369
   + https://github.com/mcrute/pydora/blob/f6d1613deb7ec23d38b3d7d2c20b065f3457c8b8/pandora/models/__init__.py#L91-L177
+
+[Attempt using requests package](/app/get_bookmarks.py) not successful after a few tries.
+
+[Attempt using pydora package](/app/get_bookmarks2.py) was successful after a few tries!
+
+Helpful pydora source code:
+
+  + https://github.com/mcrute/pydora
+  + https://github.com/mcrute/pydora/blob/master/tests/test_pandora/test_clientbuilder.py
+  + https://6xq.net/pandora-apidoc/json/partners/#partners
+  + https://github.com/mcrute/pydora/blob/f6d1613deb7ec23d38b3d7d2c20b065f3457c8b8/pandora/clientbuilder.py#L77-L114
+  + https://github.com/mcrute/pydora/blob/f6d1613deb7ec23d38b3d7d2c20b065f3457c8b8/pandora/transport.py#L27
+  + https://github.com/mcrute/pydora/blob/f6d1613deb7ec23d38b3d7d2c20b065f3457c8b8/pandora/errors.py
