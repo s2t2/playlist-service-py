@@ -1,23 +1,21 @@
 
 import os
+import time
+
 import requests
 
-# UNOFFICIAL PANDORA API DOCS
-# https://6xq.net/pandora-apidoc/json/
-# https://tuner.pandora.com/services/json
-# https://internal-tuner.pandora.com/services/json
-#> https://tuner.pandora.com/services/json/?method=user.getBookmarks
-#> https://tuner.pandora.com/services/json/?method=auth.userLogin&partner_id=123
-
 BASE_URL = "https://tuner.pandora.com/services/json"
-METHOD = "user.getBookmarks"
-request_url = os.path.join(BASE_URL, f"?method={METHOD}")
+method = "user.getBookmarks"
+auth_token = "TODO"
+sync_time = int(round(time.time() * 1000)) #> 1554041027885
+request_url = os.path.join(BASE_URL, f"?method={method}&userAuthToken={auth_token}&syncTime={sync_time}")
 print("REQUEST URL:", request_url)
 
 response = requests.get(request_url)
 
 print(response.status_code) #> 200
 print(response.text) #> '{"stat":"fail","message":"An unexpected error occurred","code":9}'
+
 breakpoint()
 
 
@@ -42,9 +40,12 @@ breakpoint()
 
 
 
-
-
-
+# UNOFFICIAL PANDORA API DOCS
+# https://6xq.net/pandora-apidoc/json/
+# https://tuner.pandora.com/services/json
+# https://internal-tuner.pandora.com/services/json
+#> https://tuner.pandora.com/services/json/?method=user.getBookmarks
+#> https://tuner.pandora.com/services/json/?method=auth.userLogin&partner_id=123
 
 # User auth token if available, partner auth token or empty if neither is known yet.
 # auth_token = "_____"
