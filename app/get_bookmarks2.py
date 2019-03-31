@@ -7,11 +7,15 @@
 
 import os
 import pprint
+
+from dotenv import load_dotenv
 import pydora # source of "pandora" sub-package
 #from pandora.client import APIClient
 import pandora.clientbuilder as cb
 
 pp = pprint.PrettyPrinter(indent=4)
+
+load_dotenv()
 
 PANDORA_USERNAME = os.environ.get("PANDORA_USERNAME", "OOPS")
 PANDORA_PASSWORD = os.environ.get("PANDORA_PASSWORD", "OOPS")
@@ -45,8 +49,30 @@ client_settings = {
 settings = client_settings["android"]
 
 client = cb.SettingsDictBuilder(settings).build() #> <class 'pandora.client.APIClient'>
+# pp.pprint(dir(client))
 
-pp.pprint(dir(client))
+breakpoint()
 
-client.login("username", "password") #> invalid partner login
-#client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
+#client.login("username", "password") #> invalid partner login
+client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
+#> {
+#   'hasAudioAds': False,
+#   'isCapped': False,
+#   'username': '______',
+#   'canListen': True,
+#   'subscriptionHasExpired': False,
+#   'userId': '1234567',
+#   'listeningTimeoutMinutes': '1440',
+#   'zeroVolumeNumMutedTracks': 1,
+#   'zeroVolumeAutoPauseEnabledFlag': True,
+#   'maxStationsAllowed': 250,
+#   'listeningTimeoutAlertMsgUri': '/mobile/still_listening.vm',
+#   'userProfileUrl': 'https://www.pandora.com/login?auth_token=ABC123&target=DEF456',
+#   'userAuthToken': '____________'
+# }
+
+response = client.get_bookmarks()
+print(type(response)) #> <class 'pandora.models.pandora.BookmarkList'>
+print(type(response.songs)) #> <class 'list'>
+
+len(response.songs) #> 83
