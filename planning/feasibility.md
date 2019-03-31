@@ -29,8 +29,10 @@ Wait Pandora doesn't have an API? But there seems to be some "unofficial" API do
   + https://6xq.net/pandora-apidoc/rest/authentication/
   + https://6xq.net/pandora-apidoc/json/bookmarks/#retrieve-bookmarks
   + https://6xq.net/pandora-apidoc/json/implementations/
+  + https://6xq.net/pandora-apidoc/json/methods/
+  + https://6xq.net/pandora-apidoc/json/errorcodes/
 
-Is this credible? It seems to want username and password auth, which is not ideal. I wonder if there is another way to obtain an access token?
+Is this credible? It seems to want username and password auth, which is not ideal. I wonder if there is another way to obtain an access token? I read not all requests use HTTPS? This might be a security concern and requires further investigation...
 
 ### Pandora Python Packages
 
@@ -38,5 +40,15 @@ Not sure about these packages:
 
   + https://github.com/mcrute/pydora (seems like more of a client app)
   + https://github.com/rectalogic/mopidy-pandora (seems to be part of a client app)
+  + https://github.com/pithos/pithos (seems to be part of a client app)
 
 Might have to use the `requests` package to directly issue requests to the unofficial API.
+
+  + http://docs.python-requests.org/en/master/user/quickstart/
+  + https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/packages/requests.md
+
+Looking at parts of pydora again:
+
+  + https://github.com/mcrute/pydora/blob/9e49c086a86deff4ae85d802e9d57278f1ac4636/pandora/client.py#L160-L164
+  + https://github.com/mcrute/pydora/blob/9e49c086a86deff4ae85d802e9d57278f1ac4636/pandora/models/pandora.py#L366-L369
+  + https://github.com/mcrute/pydora/blob/f6d1613deb7ec23d38b3d7d2c20b065f3457c8b8/pandora/models/__init__.py#L91-L177
