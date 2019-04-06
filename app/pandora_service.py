@@ -2,35 +2,37 @@
 import os
 import pprint
 from dotenv import load_dotenv
-import pydora # allows importing of the "pandora" sub-package
-import pandora.clientbuilder as cb
+import pydora
+import pandora.clientbuilder as cb # requires "import pydora"
+
+pp = pprint.PrettyPrinter(indent=4)
 
 load_dotenv()
 
 PANDORA_USERNAME = os.environ.get("PANDORA_USERNAME", "OOPS")
 PANDORA_PASSWORD = os.environ.get("PANDORA_PASSWORD", "OOPS")
+PANDORA_CLIENT_SETTINGS = {
+    "DECRYPTION_KEY": "R=U!LH$O2B#",
+    "ENCRYPTION_KEY": "6#26FRL$ZWD",
+    "PARTNER_USER": "android",
+    "PARTNER_PASSWORD": "AC7IBG09A3DTSYM4R41UJWL07VLN8JI7",
+    "DEVICE": "android-generic"
+} # FYI: these are generic public device settings (not personal or private), see: https://6xq.net/pandora-apidoc/json/partners/#partners)
 
+def authenticated_client():
+    client = cb.SettingsDictBuilder(PANDORA_CLIENT_SETTINGS).build()
+    #print("---------------------------")
+    #print("CLIENT:", type(client)) #> <class 'pandora.client.APIClient'>
+    #pp.pprint(dir(client))
+    #print("---------------------------")
+    #print("LOGGING IN...")
+    login_response = client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
+    #pp.pprint(login_response)
+    return client
 
 if __name__ == "__main__":
 
-    pp = pprint.PrettyPrinter(indent=4)
-
-    client_settings = {
-        "DECRYPTION_KEY": "R=U!LH$O2B#",
-        "ENCRYPTION_KEY": "6#26FRL$ZWD",
-        "PARTNER_USER": "android",
-        "PARTNER_PASSWORD": "AC7IBG09A3DTSYM4R41UJWL07VLN8JI7",
-        "DEVICE": "android-generic"
-    } # FYI: these are generic public device settings (not personal or private), see: https://6xq.net/pandora-apidoc/json/partners/#partners)
-    client = cb.SettingsDictBuilder(client_settings).build()
-    print("---------------------------")
-    print("CLIENT:", type(client)) #> <class 'pandora.client.APIClient'>
-    pp.pprint(dir(client))
-
-    print("---------------------------")
-    print("LOGGING IN...")
-    login_response = client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
-    pp.pprint(login_response)
+    client = authenticated_client()
 
     print("---------------------------")
     print("GETTING BOOKMARKS...")
