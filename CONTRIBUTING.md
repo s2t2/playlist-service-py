@@ -35,3 +35,17 @@ Retrieve a list of bookmarks from Pandora:
 ```sh
 python app/pandora_service.py
 ```
+
+## Testing
+
+Install the `pytest` package (first time only):
+
+```sh
+pip install pytest
+```
+
+Run tests:
+
+```sh
+pytest
+```
