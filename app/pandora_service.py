@@ -1,9 +1,3 @@
-# https://github.com/mcrute/pydora
-# https://github.com/mcrute/pydora/blob/master/tests/test_pandora/test_clientbuilder.py
-# https://6xq.net/pandora-apidoc/json/partners/#partners
-# https://github.com/mcrute/pydora/blob/f6d1613deb7ec23d38b3d7d2c20b065f3457c8b8/pandora/clientbuilder.py#L77-L114
-# https://github.com/mcrute/pydora/blob/f6d1613deb7ec23d38b3d7d2c20b065f3457c8b8/pandora/transport.py#L27
-# https://github.com/mcrute/pydora/blob/f6d1613deb7ec23d38b3d7d2c20b065f3457c8b8/pandora/errors.py
 
 import os
 import pprint
