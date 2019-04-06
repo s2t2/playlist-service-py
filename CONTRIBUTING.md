@@ -2,6 +2,10 @@
 
 ## Prerequisites
 
+  + Anaconda 3.7
+  + Python 3.7
+  + Pip
+
 ## Installation
 
 Install application from [GitHub source](https://github.com/s2t2/playlist-service-py).
@@ -29,5 +33,5 @@ pip install -r requirements.txt
 Retrieve a list of bookmarks from Pandora:
 
 ```sh
-python app/get_bookmarks.py
+python app/get_bookmarks2.py
 ```
