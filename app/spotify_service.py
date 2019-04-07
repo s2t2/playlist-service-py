@@ -11,6 +11,7 @@ CLIENT_ID = os.environ.get("SPOTIPY_CLIENT_ID", "OOPS")
 CLIENT_SECRET = os.environ.get("SPOTIPY_CLIENT_SECRET", "OOPS")
 REDIRECT_URL = os.environ.get("SPOTIPY_REDIRECT_URI", "OOPS")
 USERNAME = os.environ.get("SPOTIFY_USERNAME", "OOPS")
+AUTH_TOKEN = os.environ.get("SPOTIFY_AUTH_TOKEN", "OOPS")
 
 # doesn't require user auth
 def get_springsteen_songs():
@@ -44,13 +45,10 @@ def get_token():
     return token
 
 # requires user auth
-def get_my_playlists():
-    token = get_token()
-
-    client = spotipy.Spotify(auth=token)
-
-    #client_credentials_manager = SpotifyClientCredentials() # implicitly uses SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET env vars!!
-    #client = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+# and requires token configuration, i.e. get_token() and setting result as SPOTIFY_USER_AUTH_TOKEN env var
+def get_playlists():
+    #token = get_token()
+    client = spotipy.Spotify(auth=AUTH_TOKEN)
 
     print("---------------")
     print("CLIENT:", type(client)) #> <class 'spotipy.client.Spotify'>
@@ -77,5 +75,6 @@ if __name__ == "__main__":
 
     #get_springsteen_songs()
 
-    get_token()
-    #get_my_playlists()
+    #get_token()
+
+    get_playlists()
