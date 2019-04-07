@@ -1,11 +1,8 @@
 
 import os
-import pprint
 from dotenv import load_dotenv
 import pydora
 import pandora.clientbuilder as cb # PREREQUISITE: import pydora
-
-pp = pprint.PrettyPrinter(indent=4)
 
 load_dotenv()
 
@@ -33,7 +30,6 @@ if __name__ == "__main__":
 
     bookmarks_response = client.get_bookmarks()
     print(type(bookmarks_response))
-    #pp.pprint(dir(bookmarks_response))
 
     print(f"FOUND {len(bookmarks_response.songs)} BOOKMARKS:")
     for song in bookmarks_response.songs:

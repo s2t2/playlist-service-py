@@ -39,3 +39,13 @@
 ## Travis CI
 
   + https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+
+## Python
+
+Pretty Printing Reference:
+
+```py
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+pp.pprint("HELLO")
+```
