@@ -8,16 +8,21 @@ load_dotenv()
 
 PANDORA_USERNAME = os.environ.get("PANDORA_USERNAME", "OOPS")
 PANDORA_PASSWORD = os.environ.get("PANDORA_PASSWORD", "OOPS")
+
 CLIENT_SETTINGS = {
     "DECRYPTION_KEY": "R=U!LH$O2B#",
     "ENCRYPTION_KEY": "6#26FRL$ZWD",
     "PARTNER_USER": "android",
     "PARTNER_PASSWORD": "AC7IBG09A3DTSYM4R41UJWL07VLN8JI7",
     "DEVICE": "android-generic"
-} # FYI: these are generic public device settings (not personal or private), see: https://6xq.net/pandora-apidoc/json/partners/#partners)
+} # FYI: these are generic public device settings (not personal or private), see: https://6xq.net/pandora-apidoc/json/partners/#partners
+
+def configured_client():
+    client = cb.SettingsDictBuilder(CLIENT_SETTINGS).build()
+    return client
 
 def authenticated_client():
-    client = cb.SettingsDictBuilder(CLIENT_SETTINGS).build()
+    client = configured_client()
     login_response = client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
     return client
 
