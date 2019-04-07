@@ -28,6 +28,19 @@ From inside the virtual environment, install package dependencies:
 pip install -r requirements.txt
 ```
 
+## Setup
+
+Follow the instructions below to obtain credentials and configure environment variables. See also the [example .env file](/.example.env).
+
+### Pandora Credentials
+
+Obtain your Pandora username and password, and store them in environment variables  called `PANDORA_USERNAME` and `PANDORA_PASSWORD`, respectively.
+
+### Spotify Credentials
+
+Create a [Spotify Client application](https://developer.spotify.com/dashboard/applications/), and note its credentials, then store them in environment variables called `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET`, respectively.
+
+
 ## Usage
 
 Retrieve a list of bookmarks from Pandora:
