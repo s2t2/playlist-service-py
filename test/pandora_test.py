@@ -3,19 +3,9 @@ import os
 from dotenv import load_dotenv
 import pydora
 import pandora
-
 import pytest
 
-from app.pandora_service import CLIENT_SETTINGS, authenticated_client
-
-def test_client_settings():
-    assert CLIENT_SETTINGS == {
-        "DECRYPTION_KEY": "R=U!LH$O2B#",
-        "ENCRYPTION_KEY": "6#26FRL$ZWD",
-        "PARTNER_USER": "android",
-        "PARTNER_PASSWORD": "AC7IBG09A3DTSYM4R41UJWL07VLN8JI7",
-        "DEVICE": "android-generic"
-    } # FYI: these are generic public device settings (not personal or private), see: https://6xq.net/pandora-apidoc/json/partners/#partners)
+from app.pandora_service import authenticated_client
 
 # so yes these tests are going to make real live requests
 # which is generally something we should avoid
