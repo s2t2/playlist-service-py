@@ -10,18 +10,6 @@ from app.pandora_service import (
     configured_client, authenticated_client
 )
 
-def test_configured_client():
-    # it should be a Pandora API client:
-    client = configured_client()
-    assert isinstance(client, pandora.client.APIClient)
-
-    # it should be configured with provided settings:
-    assert client.partner_user == CLIENT_SETTINGS["PARTNER_USER"]
-    assert client.device == CLIENT_SETTINGS["DEVICE"]
-
-    # it should be able to login:
-    assert "login" in dir(client)
-
 # so yes these tests are going to make real live requests
 # which is generally something we should avoid
 # but at this time this repo is more for instructional purposes
@@ -39,6 +27,19 @@ load_dotenv()
 CI_ENV = os.environ.get("CI", False) # expect default environment variable setting of "CI=true" on Travis CI, see: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
 
 SKIP_REASON = "to avoid configuring credentials on, and issuing requests from, the CI server"
+
+@pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
+def test_configured_client():
+    # it should be a Pandora API client:
+    client = configured_client()
+    assert isinstance(client, pandora.client.APIClient)
+
+    # it should be configured with provided settings:
+    assert client.partner_user == CLIENT_SETTINGS["PARTNER_USER"]
+    assert client.device == CLIENT_SETTINGS["DEVICE"]
+
+    # it should be able to login:
+    assert "login" in dir(client)
 
 @pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
 def test_authenticated_client():
