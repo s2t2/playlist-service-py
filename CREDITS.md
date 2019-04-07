@@ -27,6 +27,7 @@ FYI: to import the `pandora` module you may first have to import the `pydora` mo
   + https://developer.spotify.com/documentation/web-api/
   + https://developer.spotify.com/console/post-playlist-tracks/
   + https://developer.spotify.com/documentation/web-api/reference/playlists/add-tracks-to-playlist/
+  + https://developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/
 
 ### The `spotipy` Package
 
@@ -34,6 +35,23 @@ FYI: to import the `pandora` module you may first have to import the `pydora` mo
   + https://spotipy.readthedocs.io/en/latest/
   + https://github.com/s2t2/my-spotify-app-py/blob/master/list_songs.py
   + https://spotipy.readthedocs.io/en/latest/#client-credentials-flow
+  + https://github.com/plamere/spotipy/blob/master/spotipy/client.py
+  + https://github.com/plamere/spotipy/blob/master/spotipy/util.py
+
+### Spotify Auth
+
+  + https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-flows
+  + https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+
+"This flow is suitable for long-running applications in which the user grants permission only once. It provides an access token that can be refreshed. Since the token exchange involves sending your secret key, perform this on a secure location, like a backend service, and not from a client such as a browser or from a mobile app."
+
+"Have your application request authorization (GET https://accounts.spotify.com/authorize)"
+
+  + https://spotipy.readthedocs.io/en/latest/#authorization-code-flow
+  + https://developer.spotify.com/documentation/general/guides/scopes/
+  + https://developer.spotify.com/documentation/general/guides/scopes/#playlist-read-private
+  + https://developer.spotify.com/documentation/general/guides/scopes/#playlist-modify-private
+  + `SpotipyOauth`: https://github.com/plamere/spotipy/blob/master/spotipy/oauth2.py#L93-L264
 
 ## Pytest
 
