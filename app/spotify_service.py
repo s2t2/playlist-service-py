@@ -41,7 +41,8 @@ if __name__ == "__main__":
     # ... adapted from: https://spotipy.readthedocs.io/en/latest/#client-credentials-flow
     #
 
-    playlists = client.user_playlists("spotify") # hmm there are > 900 playlists and I needed to quit the program... need to try a different request
+    #playlists = client.user_playlists("spotify") # hmm there are > 900 playlists and I needed to quit the program... need to try a different request
+    playlists = client.current_user_playlists() #> requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://api.spotify.com/v1/me/playlists?limit=50&offset=0
 
     while playlists:
         print(type(playlists))
