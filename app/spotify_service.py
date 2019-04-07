@@ -38,6 +38,9 @@ def get_token():
     # AUTH_SCOPE = ["playlist-read-private", "playlist-modify-private"] #> see https://developer.spotify.com/documentation/general/guides/scopes/#playlist-modify-private
     AUTH_SCOPE = "playlist-read-private" # trying this for now, simplest step forward
     token = util.prompt_for_user_token(USERNAME, AUTH_SCOPE)
+    # might need to use this kind of approach instead...
+    #user_credentials_filepath = os.path.join(os.path.dirname(__file__), "..", "credentials", "spotify_user.json")
+    #token = util.prompt_for_user_token(USERNAME, AUTH_SCOPE, cache_path=user_credentials_filepath)
     return token
 
 # requires user auth

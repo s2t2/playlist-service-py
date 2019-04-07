@@ -71,6 +71,12 @@ This also seems to add a file called `.cache-USERNAME` to the root directory of 
 
 Moving it to "credentials/spotify_user.json" in case we need it later. And gitignoring it. Obviously.
 
+Here is the source of what's going on with that file, and how to customize its location:
+
+  + https://github.com/plamere/spotipy/blob/master/spotipy/oauth2.py#L123-L130
+  + https://github.com/plamere/spotipy/blob/master/spotipy/util.py#L9-L51
+
+
 
 ## Pytest
 
