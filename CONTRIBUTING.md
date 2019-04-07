@@ -38,15 +38,21 @@ Obtain your Pandora username and password, and store them in environment variabl
 
 ### Spotify Credentials
 
-Create a [Spotify Client application](https://developer.spotify.com/dashboard/applications/), and note its credentials, then store them in environment variables called `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET`, respectively.
+Create a [Spotify Client application](https://developer.spotify.com/dashboard/applications/), and note its credentials, then store them in environment variables called `SPOTIPY_CLIENT_ID` and `SPOTIPY_CLIENT_SECRET`, respectively.
 
 
 ## Usage
 
-Retrieve a list of bookmarks from Pandora:
+List bookmarked songs on Pandora:
 
 ```sh
 python app/pandora_service.py
+```
+
+List songs in the "Pandora Bookmarks" playlist on Spotify:
+
+```sh
+python app/spotify_service.py
 ```
 
 ## Testing
