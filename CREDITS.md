@@ -31,3 +31,11 @@
   + https://github.com/plamere/spotipy
   + https://spotipy.readthedocs.io/en/latest/
   + https://github.com/s2t2/my-spotify-app-py/blob/master/list_songs.py
+
+## Pytest
+
+  + https://stackoverflow.com/questions/38442897/how-do-i-disable-a-test-using-py-test
+
+## Travis CI
+
+  + https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
