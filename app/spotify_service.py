@@ -9,37 +9,22 @@ load_dotenv() # load environment variables
 CLIENT_ID = os.environ.get("SPOTIFY_CLIENT_ID", "OOPS")
 CLIENT_SECRET = os.environ.get("SPOTIFY_CLIENT_SECRET", "OOPS")
 
-if __name__ == "__main__":
-
-    client_credentials_manager = SpotifyClientCredentials() # implicitly uses SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET env vars!!
-    client = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+def example_search(client):
+    search_term = "Springsteen on Broadway"
     print("---------------")
-    print("CLIENT:", type(client)) #> <class 'spotipy.client.Spotify'>
-    print(dir(client))
+    print("SEARCH:", search_term)
+    response = client.search(q=search_term, limit=20)
+    print("---------------")
+    print("RESPONSE:", type(response))
+    songs = response["tracks"]["items"]
+    print("---------------")
+    print(f"SONGS ({len(songs)}):", type(response))
+    for i, song in enumerate(songs):
+        print(f"  {i}) {song['name']}")
 
-    #
-    # EXAMPLE SEARCH
-    #
-    #search_term = "Springsteen on Broadway"
-    #print("---------------")
-    #print("SEARCH:", search_term)
-#
-    #response = client.search(q=search_term, limit=20)
-    #print("---------------")
-    #print("RESPONSE:", type(response))
-#
-    #songs = response["tracks"]["items"]
-    #print("---------------")
-    #print(f"SONGS ({len(songs)}):", type(response))
-#
-    #for i, song in enumerate(songs):
-    #    print(f"  {i}) {song['name']}")
-
-
-    #
-    # GET PLAYLISTS
-    # ... adapted from: https://spotipy.readthedocs.io/en/latest/#client-credentials-flow
-    #
+def get_my_playlists(client):
+    print("---------------")
+    print("GETTING PLAYLISTS...")
 
     #playlists = client.user_playlists("spotify") # hmm there are > 900 playlists and I needed to quit the program... need to try a different request
     playlists = client.current_user_playlists() #> requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://api.spotify.com/v1/me/playlists?limit=50&offset=0
@@ -54,3 +39,15 @@ if __name__ == "__main__":
             playlists = client.next(playlists)
         else:
             playlists = None
+
+if __name__ == "__main__":
+
+    client_credentials_manager = SpotifyClientCredentials() # implicitly uses SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET env vars!!
+    client = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+    print("---------------")
+    print("CLIENT:", type(client)) #> <class 'spotipy.client.Spotify'>
+    print(dir(client))
+
+    example_search(client)
+
+    get_my_playlists(client)

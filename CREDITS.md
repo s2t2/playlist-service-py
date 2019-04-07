@@ -33,6 +33,7 @@ FYI: to import the `pandora` module you may first have to import the `pydora` mo
   + https://github.com/plamere/spotipy
   + https://spotipy.readthedocs.io/en/latest/
   + https://github.com/s2t2/my-spotify-app-py/blob/master/list_songs.py
+  + https://spotipy.readthedocs.io/en/latest/#client-credentials-flow
 
 ## Pytest
 
