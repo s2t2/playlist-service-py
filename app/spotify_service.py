@@ -6,8 +6,8 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 load_dotenv() # load environment variables
 
-CLIENT_ID = os.environ.get("SPOTIFY_CLIENT_ID", "OOPS")
-CLIENT_SECRET = os.environ.get("SPOTIFY_CLIENT_SECRET", "OOPS")
+CLIENT_ID = os.environ.get("SPOTIPY_CLIENT_ID", "OOPS")
+CLIENT_SECRET = os.environ.get("SPOTIPY_CLIENT_SECRET", "OOPS")
 
 def example_search(client):
     search_term = "Springsteen on Broadway"
