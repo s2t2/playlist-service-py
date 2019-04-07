@@ -1,9 +1,9 @@
 
-import pydora
-import pandora # PREREQUISITE: import pydora
-
 import os
 from dotenv import load_dotenv
+import pydora
+import pandora
+
 import pytest
 
 from app.pandora_service import CLIENT_SETTINGS, authenticated_client
@@ -37,5 +37,10 @@ SKIP_REASON = "to avoid configuring credentials on, and issuing requests from, t
 
 @pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
 def test_client():
+
+    # it should be a Pandora API client:
     client = authenticated_client()
     assert isinstance(client, pandora.client.APIClient)
+
+    # it should be able to get my bookmarks:
+    assert "get_bookmarks" in dir(client)

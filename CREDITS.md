@@ -18,6 +18,8 @@
   + https://github.com/mcrute/pydora/blob/master/pandora/transport.py#L27
   + https://github.com/mcrute/pydora/blob/master/tests/test_pandora/test_clientbuilder.py
 
+FYI: to import the `pandora` module you may first have to import the `pydora` module.
+
 ## Spotify
 
 ### Spotify API

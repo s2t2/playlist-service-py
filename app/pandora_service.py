@@ -2,7 +2,7 @@
 import os
 from dotenv import load_dotenv
 import pydora
-import pandora.clientbuilder as cb # PREREQUISITE: import pydora
+import pandora.clientbuilder as cb
 
 load_dotenv()
 
