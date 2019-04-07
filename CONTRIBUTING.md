@@ -47,5 +47,5 @@ pip install pytest
 Run tests:
 
 ```sh
-pytest
+pytest --disable-pytest-warnings
 ```
