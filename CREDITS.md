@@ -53,6 +53,25 @@ FYI: to import the `pandora` module you may first have to import the `pydora` mo
   + https://developer.spotify.com/documentation/general/guides/scopes/#playlist-modify-private
   + `SpotipyOauth`: https://github.com/plamere/spotipy/blob/master/spotipy/oauth2.py#L93-L264
 
+
+One time method to get a token prompts user to login, then sends user to a redirect url and appends an auth code into the url params. The terminal asks for me to input the entire URL, and returns an access token.
+
+This also seems to add a file called `.cache-USERNAME` to the root directory of the repo. it looks like this:
+
+```json
+{
+    "access_token": "_____",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "refresh_token": "______",
+    "scope": "playlist-read-private",
+    "expires_at": 1554651631
+}
+```
+
+Moving it to "credentials/spotify_user.json" in case we need it later. And gitignoring it. Obviously.
+
+
 ## Pytest
 
   + https://stackoverflow.com/questions/38442897/how-do-i-disable-a-test-using-py-test
