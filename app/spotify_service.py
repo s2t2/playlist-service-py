@@ -49,7 +49,8 @@ def get_token():
 # requires user auth token
 def get_playlists():
     #token = get_token()
-    client = spotipy.Spotify(auth=AUTH_TOKEN)
+    #client = spotipy.Spotify(auth=AUTH_TOKEN)
+    client = authenticated_client()
     print("---------------")
     print("CLIENT:", type(client)) #> <class 'spotipy.client.Spotify'>
     print(dir(client))
@@ -69,20 +70,29 @@ def get_playlists():
             response = None
     return playlists
 
+def authenticated_client():
+    #client = spotipy.Spotify(auth=AUTH_TOKEN)
+    token = get_token()
+    client = spotipy.Spotify(auth=token)
+    return client
+
 # requires user auth token
 def create_playlist():
-    client = spotipy.Spotify(auth=AUTH_TOKEN)
-    print("---------------")
-    print("PLAYLIST EXISTS?")
-
     playlists = get_playlists()
+
+    PLAYLIST_NAME = "Pandora Bookmark"
+    print("---------------")
+    print("PLAYLIST EXISTS?", PLAYLIST_NAME)
+
+    if PLAYLIST_NAME in [p["name"] for p in playlists]:
+        print("FOUND PLAYLIST")
 
     breakpoint()
 
-    print("---------------")
-    print("CREATING PLAYLIST...")
-    #playlists = client.user_playlists("spotify") # hmm there are > 900 playlists and I needed to quit the program... need to try a different request
-    playlists = client.current_user_playlists()
+    #print("---------------")
+    #print("CREATING PLAYLIST...")
+    ##playlists = client.user_playlists("spotify") # hmm there are > 900 playlists and I needed to quit the program... need to try a different request
+    #playlists = client.current_user_playlists()
 
 if __name__ == "__main__":
 
