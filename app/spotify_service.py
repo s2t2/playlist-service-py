@@ -67,9 +67,9 @@ def get_playlists():
     #playlists = client.user_playlists("spotify") # hmm there are > 900 playlists and I needed to quit the program... need to try a different request
     response = client.current_user_playlists() #> requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://api.spotify.com/v1/me/playlists?limit=50&offset=0
     while response:
-        print(type(response))
+        #print(type(response)) #> dict
         for i, playlist in enumerate(response['items']):
-            print(f"{i + 1 + response['offset']} {playlist['uri']} {playlist['name']}")
+            #print(f"{i + 1 + response['offset']} {playlist['uri']} {playlist['name']}")
             playlists.append(playlist)
         if response["next"]:
             response = client.next(response)
@@ -78,23 +78,22 @@ def get_playlists():
     return playlists
 
 # requires user auth token
-def create_playlist():
+def find_or_create_playlist():
     playlists = get_playlists()
 
-    PLAYLIST_NAME = "Pandora Bookmarks III"
+    PLAYLIST_NAME = "Pandora Bookmarks"
 
     if PLAYLIST_NAME in [p["name"] for p in playlists]:
-        print("FOUND PLAYLIST", PLAYLIST_NAME)
-        breakpoint()
+        playlist = [p for p in playlists if p["name"] == PLAYLIST_NAME ][0]
+        #playlist.keys() #> dict_keys(['collaborative', 'external_urls', 'href', 'id', 'images', 'name', 'owner', 'primary_color', 'public', 'snapshot_id', 'tracks', 'type', 'uri'])
+        print(f"FOUND PLAYLIST: '{playlist['name']}' ({playlist['id']})")
     else:
         print("PLAYLIST NOT FOUND")
         client = authenticated_client()
         playlist = client.user_playlist_create(user=USERNAME, name=PLAYLIST_NAME, public=False)
         #playlist.keys() #> dict_keys(['collaborative', 'description', 'external_urls', 'followers', 'href', 'id', 'images', 'name', 'owner', 'primary_color', 'public', 'snapshot_id', 'tracks', 'type', 'uri'])
         print(f"CREATED PLAYLIST: '{playlist['name']}' ({playlist['id']})")
-
-        breakpoint()
-
+    return playlist
 
 # def add_track(parameter_list):
 #     client.user_playlist_add_tracks(____)
@@ -105,4 +104,5 @@ if __name__ == "__main__":
     #get_springsteen_songs()
     #get_token()
     #get_playlists()
-    create_playlist()
+    playlist = find_or_create_playlist()
+    print(playlist["id"])
