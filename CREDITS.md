@@ -76,6 +76,9 @@ Here is the source of what's going on with that file, and how to customize its l
   + https://github.com/plamere/spotipy/blob/master/spotipy/oauth2.py#L123-L130
   + https://github.com/plamere/spotipy/blob/master/spotipy/util.py#L9-L51
 
+Looks like scope can be a list, see:
+
+  + https://github.com/plamere/spotipy/blob/master/spotipy/oauth2.py#L225
 
 
 ## Pytest

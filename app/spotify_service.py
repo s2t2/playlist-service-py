@@ -37,9 +37,10 @@ def get_springsteen_songs():
 # then store that token in an env var SPOTIFY_USER_AUTH_TOKEN
 # to enable future programmatic usage
 def get_token():
-    # looks like scope can be a list, see: https://github.com/plamere/spotipy/blob/master/spotipy/oauth2.py#L225
-    # AUTH_SCOPE = ["playlist-read-private", "playlist-modify-private"] #> see https://developer.spotify.com/documentation/general/guides/scopes/#playlist-modify-private
-    AUTH_SCOPE = "playlist-read-private" # trying this for now, simplest step forward
+    #AUTH_SCOPE = ["playlist-read-private", "playlist-modify-private"] #> AttributeError: 'list' object has no attribute 'split'
+    #AUTH_SCOPE = "playlist-read-private playlist-modify-private" # should be split() #> Insufficient client scope
+    AUTH_SCOPE = "playlist-modify-private"
+
     token = util.prompt_for_user_token(USERNAME, AUTH_SCOPE)
     # might need to use this kind of approach instead...
     #user_credentials_filepath = os.path.join(os.path.dirname(__file__), "..", "credentials", "spotify_user.json")
@@ -90,8 +91,10 @@ def create_playlist():
         breakpoint()
     else:
         print("PLAYLIST NOT FOUND. CREATING...")
-        client = authenticated_client()
-        response = client.user_playlist_create(user=USERNAME, name=PLAYLIST_NAME)
+        scope = "playlist-modify-private"
+        token = util.prompt_for_user_token(USERNAME, scope)
+        client = spotipy.Spotify(auth=token)
+        response = client.user_playlist_create(user=USERNAME, name=PLAYLIST_NAME, public=False)
         breakpoint()
 
 

@@ -5,3 +5,6 @@
 __pycache__/
 
 .cache-*
+
+
+test/mock_data/create_playlist_response.py
