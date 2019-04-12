@@ -31,6 +31,7 @@ def get_springsteen_songs():
     print(f"SONGS ({len(songs)}):", type(response))
     for i, song in enumerate(songs):
         print(f"  {i}) {song['name']}")
+    return songs
 
 # requires user interaction to get a token to auth on their behalf (auth token)
 # do this initially to get a valid token,
@@ -87,22 +88,39 @@ def find_or_create_playlist():
         playlist = [p for p in playlists if p["name"] == PLAYLIST_NAME ][0]
         #playlist.keys() #> dict_keys(['collaborative', 'external_urls', 'href', 'id', 'images', 'name', 'owner', 'primary_color', 'public', 'snapshot_id', 'tracks', 'type', 'uri'])
         print(f"FOUND PLAYLIST: '{playlist['name']}' ({playlist['id']})")
+        # count songs
     else:
         print("PLAYLIST NOT FOUND")
         client = authenticated_client()
         playlist = client.user_playlist_create(user=USERNAME, name=PLAYLIST_NAME, public=False)
         #playlist.keys() #> dict_keys(['collaborative', 'description', 'external_urls', 'followers', 'href', 'id', 'images', 'name', 'owner', 'primary_color', 'public', 'snapshot_id', 'tracks', 'type', 'uri'])
         print(f"CREATED PLAYLIST: '{playlist['name']}' ({playlist['id']})")
+        # count songs
+
     return playlist
 
-# def add_track(parameter_list):
-#     client.user_playlist_add_tracks(____)
+def add_track():
+    songs = get_springsteen_songs()
+    #songs[0]["id"] #> '7G7UNs17d0Grqk63M2MAwu'
+    #songs[0]["uri"] #> 'spotify:track:7G7UNs17d0Grqk63M2MAwu'
+    #songs[0]["name"] #> 'My Hometown - Springsteen on Broadway'
+    track_uris = [songs[0]["uri"]] #> spotify:track:7G7UNs17d0Grqk63M2MAwu"
 
+    playlist = find_or_create_playlist()
+
+    client = authenticated_client()
+
+    #position = ""  # If omitted, the tracks will be appended to the playlist.
+    response = client.user_playlist_add_tracks(USERNAME, playlist["id"], track_uris)
+    #> {'snapshot_id': 'xzy123'}
+    #return response["snapshot_id"]
 
 
 if __name__ == "__main__":
     #get_springsteen_songs()
     #get_token()
     #get_playlists()
-    playlist = find_or_create_playlist()
-    print(playlist["id"])
+    #playlist = find_or_create_playlist()
+    #print(playlist["id"])
+
+    add_track()

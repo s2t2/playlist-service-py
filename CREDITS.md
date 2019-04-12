@@ -28,6 +28,7 @@ FYI: to import the `pandora` module you may first have to import the `pydora` mo
   + https://developer.spotify.com/console/post-playlist-tracks/
   + https://developer.spotify.com/documentation/web-api/reference/playlists/add-tracks-to-playlist/
   + https://developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/
+  + https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids
 
 ### The `spotipy` Package
 
