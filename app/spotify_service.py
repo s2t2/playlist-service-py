@@ -38,8 +38,8 @@ def get_springsteen_songs():
 # to enable future programmatic usage
 def get_token():
     #AUTH_SCOPE = ["playlist-read-private", "playlist-modify-private"] #> AttributeError: 'list' object has no attribute 'split'
-    #AUTH_SCOPE = "playlist-read-private playlist-modify-private" # should be split() #> Insufficient client scope
-    AUTH_SCOPE = "playlist-modify-private"
+    AUTH_SCOPE = "playlist-read-private playlist-modify-private" # should be split() #> Insufficient client scope
+    #AUTH_SCOPE = "playlist-modify-private"
 
     token = util.prompt_for_user_token(USERNAME, AUTH_SCOPE)
     # might need to use this kind of approach instead...
@@ -77,24 +77,22 @@ def get_playlists():
             response = None
     return playlists
 
-
 # requires user auth token
 def create_playlist():
     playlists = get_playlists()
 
-    PLAYLIST_NAME = "Pandora Bookmarks"
-    print("---------------")
-    print("PLAYLIST EXISTS?", PLAYLIST_NAME)
+    PLAYLIST_NAME = "Pandora Bookmarks III"
 
     if PLAYLIST_NAME in [p["name"] for p in playlists]:
-        print("PLAYLIST EXISTS")
+        print("FOUND PLAYLIST", PLAYLIST_NAME)
         breakpoint()
     else:
-        print("PLAYLIST NOT FOUND. CREATING...")
-        scope = "playlist-modify-private"
-        token = util.prompt_for_user_token(USERNAME, scope)
-        client = spotipy.Spotify(auth=token)
-        response = client.user_playlist_create(user=USERNAME, name=PLAYLIST_NAME, public=False)
+        print("PLAYLIST NOT FOUND")
+        client = authenticated_client()
+        playlist = client.user_playlist_create(user=USERNAME, name=PLAYLIST_NAME, public=False)
+        #playlist.keys() #> dict_keys(['collaborative', 'description', 'external_urls', 'followers', 'href', 'id', 'images', 'name', 'owner', 'primary_color', 'public', 'snapshot_id', 'tracks', 'type', 'uri'])
+        print(f"CREATED PLAYLIST: '{playlist['name']}' ({playlist['id']})")
+
         breakpoint()
 
 
