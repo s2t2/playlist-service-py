@@ -12,7 +12,7 @@ CLIENT_SECRET = os.environ.get("SPOTIPY_CLIENT_SECRET", "OOPS")
 REDIRECT_URL = os.environ.get("SPOTIPY_REDIRECT_URI", "OOPS")
 USERNAME = os.environ.get("SPOTIFY_USERNAME", "OOPS")
 AUTH_SCOPE = "playlist-read-private playlist-modify-private"
-AUTH_TOKEN = os.environ.get("SPOTIFY_AUTH_TOKEN", "OOPS")
+#AUTH_TOKEN = os.environ.get("SPOTIFY_AUTH_TOKEN", "OOPS")
 
 PLAYLIST_NAME = os.environ.get("SPOTIFY_PLAYLIST_NAME", "My Pandora Bookmarks III")
 
@@ -41,17 +41,9 @@ def authenticated_client():
 
 # requires user auth token
 def get_playlists():
-    #token = get_token()
-    #client = spotipy.Spotify(auth=AUTH_TOKEN)
     client = authenticated_client()
-    #print("---------------")
-    #print("CLIENT:", type(client)) #> <class 'spotipy.client.Spotify'>
-    #print(dir(client))
-    #print("---------------")
-    #print("GETTING PLAYLISTS...")
     playlists = []
-    #playlists = client.user_playlists("spotify") # hmm there are > 900 playlists and I needed to quit the program... need to try a different request
-    response = client.current_user_playlists() #> requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://api.spotify.com/v1/me/playlists?limit=50&offset=0
+    response = client.current_user_playlists()
     while response:
         #print(type(response)) #> dict
         for i, playlist in enumerate(response['items']):
