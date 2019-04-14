@@ -32,10 +32,7 @@ def get_springsteen_songs():
         print(f" {song['uri']} {song['name']}")
     return songs
 
-# requires user interaction to get a token to auth on their behalf (auth token)
-# do this initially to get a valid token,
-# then store that token in an env var SPOTIFY_USER_AUTH_TOKEN
-# to enable future programmatic usage
+# prompts user to login to spotify and paste a callback url into the terminal
 def get_token():
     #AUTH_SCOPE = ["playlist-read-private", "playlist-modify-private"] #> AttributeError: 'list' object has no attribute 'split'
     AUTH_SCOPE = "playlist-read-private playlist-modify-private" # should be split() #> Insufficient client scope
@@ -107,6 +104,9 @@ def add_tracks(track_uris):
     return parsed_response #> {'snapshot_id': 'xzy123'}
 
 if __name__ == "__main__":
+
+    token = get_token()
+    quit()
 
     songs = get_springsteen_songs()
     #print(songs[0])
