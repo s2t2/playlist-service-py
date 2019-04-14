@@ -6,6 +6,7 @@ import spotipy
 
 from app.spotify_service import (
     USERNAME,
+    AUTH_SCOPE,
     PLAYLIST_NAME,
     get_springsteen_songs,
     get_token,
@@ -13,6 +14,9 @@ from app.spotify_service import (
     find_or_create_playlist,
     add_tracks
 )
+
+def test_auth_scope():
+    assert AUTH_SCOPE == "playlist-read-private playlist-modify-private"
 
 def test_playlist_name():
     assert PLAYLIST_NAME == "My Pandora Bookmarks III"

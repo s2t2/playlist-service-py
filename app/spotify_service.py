@@ -11,6 +11,7 @@ CLIENT_ID = os.environ.get("SPOTIPY_CLIENT_ID", "OOPS")
 CLIENT_SECRET = os.environ.get("SPOTIPY_CLIENT_SECRET", "OOPS")
 REDIRECT_URL = os.environ.get("SPOTIPY_REDIRECT_URI", "OOPS")
 USERNAME = os.environ.get("SPOTIFY_USERNAME", "OOPS")
+AUTH_SCOPE = "playlist-read-private playlist-modify-private"
 AUTH_TOKEN = os.environ.get("SPOTIFY_AUTH_TOKEN", "OOPS")
 
 PLAYLIST_NAME = os.environ.get("SPOTIFY_PLAYLIST_NAME", "My Pandora Bookmarks III")
@@ -26,14 +27,10 @@ def get_springsteen_songs():
 
 # prompts user to login to spotify and paste a callback url into the terminal
 def get_token():
-    #AUTH_SCOPE = ["playlist-read-private", "playlist-modify-private"] #> AttributeError: 'list' object has no attribute 'split'
-    AUTH_SCOPE = "playlist-read-private playlist-modify-private" # should be split() #> Insufficient client scope
-    #AUTH_SCOPE = "playlist-modify-private"
-
     token = util.prompt_for_user_token(USERNAME, AUTH_SCOPE)
     # might need to use this kind of approach instead...
-    #user_credentials_filepath = os.path.join(os.path.dirname(__file__), "..", "credentials", "spotify_user.json")
-    #token = util.prompt_for_user_token(USERNAME, AUTH_SCOPE, cache_path=user_credentials_filepath)
+    #credentials_filepath = os.path.join(os.path.dirname(__file__), "..", "credentials", "spotify_user.json")
+    #token = util.prompt_for_user_token(USERNAME, AUTH_SCOPE, cache_path=credentials_filepath)
     return token
 
 def authenticated_client():

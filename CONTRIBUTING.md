@@ -38,9 +38,11 @@ Obtain your Pandora username and password, and store them in environment variabl
 
 ### Spotify Credentials
 
-Create a [Spotify Client application](https://developer.spotify.com/dashboard/applications/), and note its credentials, then store them in environment variables called `SPOTIPY_CLIENT_ID` and `SPOTIPY_CLIENT_SECRET`, respectively.
+Set an environment variable called `SPOTIFY_USERNAME` to denote your Spotify username.
 
-Also follow this [Spotify User Authentication Guide](https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/packages/spotipy.md#user-authentication) to set environment variables `SPOTIPY_REDIRECT_URL` and `SPOTIFY_AUTH_TOKEN`.
+Create a [Spotify Client application](https://developer.spotify.com/dashboard/applications/), then store its configuration information in environment variables `SPOTIPY_CLIENT_ID`, `SPOTIPY_CLIENT_SECRET`, and `SPOTIPY_REDIRECT_URL`.
+
+The first time you use the app via the command line, it will prompt you to login, and will store a resulting credentials file called `.cache-SPOTIFY_USERNAME` to the root directory of the repo. Subsequent requests will look for the credentials file at this location to prevent additional user logins.
 
 ## Usage
 

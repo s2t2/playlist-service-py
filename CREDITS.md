@@ -81,6 +81,23 @@ Looks like scope can be a list, see:
 
   + https://github.com/plamere/spotipy/blob/master/spotipy/oauth2.py#L225
 
+...
+
+Some code that might be worth trying in conjunction with a Flask app callback:
+
+```py
+def code_to_token(auth_code):
+    credentials_filepath = os.path.join(os.path.dirname(__file__), "..", "credentials", "spotify_user.json")
+    sp_oauth = oauth2.SpotifyOAuth(
+        client_id=CLIENT_ID,
+        client_secret=CLIENT_SECRET,
+        redirect_uri=REDIRECT_URL,
+        scope=AUTH_SCOPE,
+        cache_path=credentials_filepath
+    )
+    token_info = sp_oauth.get_access_token(auth_code)
+    return token_info["access_token"]
+```
 
 ## Pytest
 
