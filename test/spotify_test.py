@@ -1,6 +1,6 @@
 
 
-from app.spotify_service import authenticated_client
+from app.spotify_service import authenticated_client, add_tracks
 import spotipy
 
 import os
@@ -18,3 +18,10 @@ def test_authenticated_client():
     assert "search" in dir(client)
     assert "user_playlist_create" in dir(client)
     assert "user_playlist_add_tracks" in dir(client)
+
+@pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
+def test_add_track():
+    track_ids = ["spotify:track:4912tpbfCZEcSqPvmQVu1W"]
+    parsed_response = add_tracks(track_ids)
+    assert isinstance(parsed_response, dict)
+    assert isinstance(parsed_response["snapshot_id"], str)

@@ -17,20 +17,17 @@ AUTH_TOKEN = os.environ.get("SPOTIFY_AUTH_TOKEN", "OOPS")
 def get_springsteen_songs():
     client_credentials_manager = SpotifyClientCredentials() # implicitly uses SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET env vars!!
     client = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    print("---------------")
-    print("CLIENT:", type(client)) #> <class 'spotipy.client.Spotify'>
-    print(dir(client))
     search_term = "Springsteen on Broadway"
-    print("---------------")
-    print("SEARCH:", search_term)
+    #print("---------------")
+    #print("SEARCH:", search_term)
     response = client.search(q=search_term, limit=20)
-    print("---------------")
-    print("RESPONSE:", type(response))
+    #print("---------------")
+    #print("RESPONSE:", type(response))
     songs = response["tracks"]["items"]
-    print("---------------")
-    print(f"SONGS ({len(songs)}):", type(response))
+    #print("---------------")
+    print(f"SONGS ({len(songs)}):")
     for i, song in enumerate(songs):
-        print(f"  {i}) {song['name']}")
+        print(f" {song['uri']} {song['name']}")
     return songs
 
 # requires user interaction to get a token to auth on their behalf (auth token)
@@ -82,45 +79,44 @@ def get_playlists():
 def find_or_create_playlist():
     playlists = get_playlists()
 
-    PLAYLIST_NAME = "Pandora Bookmarks"
+    PLAYLIST_NAME = "My Pandora Bookmarks"
 
     if PLAYLIST_NAME in [p["name"] for p in playlists]:
         playlist = [p for p in playlists if p["name"] == PLAYLIST_NAME ][0]
         #playlist.keys() #> dict_keys(['collaborative', 'external_urls', 'href', 'id', 'images', 'name', 'owner', 'primary_color', 'public', 'snapshot_id', 'tracks', 'type', 'uri'])
-        print(f"FOUND PLAYLIST: '{playlist['name']}' ({playlist['id']})")
+        #print(f"FOUND PLAYLIST: '{playlist['name']}' ({playlist['id']})")
         # count songs
     else:
-        print("PLAYLIST NOT FOUND")
+        #print("PLAYLIST NOT FOUND")
         client = authenticated_client()
         playlist = client.user_playlist_create(user=USERNAME, name=PLAYLIST_NAME, public=False)
         #playlist.keys() #> dict_keys(['collaborative', 'description', 'external_urls', 'followers', 'href', 'id', 'images', 'name', 'owner', 'primary_color', 'public', 'snapshot_id', 'tracks', 'type', 'uri'])
-        print(f"CREATED PLAYLIST: '{playlist['name']}' ({playlist['id']})")
+        #print(f"CREATED PLAYLIST: '{playlist['name']}' ({playlist['id']})")
         # count songs
 
     return playlist
 
-def add_track():
-    songs = get_springsteen_songs()
-    #songs[0]["id"] #> '7G7UNs17d0Grqk63M2MAwu'
-    #songs[0]["uri"] #> 'spotify:track:7G7UNs17d0Grqk63M2MAwu'
-    #songs[0]["name"] #> 'My Hometown - Springsteen on Broadway'
-    track_uris = [songs[0]["uri"]] #> spotify:track:7G7UNs17d0Grqk63M2MAwu"
-
-    playlist = find_or_create_playlist()
-
+def add_tracks(track_uris):
     client = authenticated_client()
 
-    #position = ""  # If omitted, the tracks will be appended to the playlist.
-    response = client.user_playlist_add_tracks(USERNAME, playlist["id"], track_uris)
-    #> {'snapshot_id': 'xzy123'}
-    #return response["snapshot_id"]
+    playlist = find_or_create_playlist()
+    print("PLAYLIST: ", playlist["id"], playlist["name"])
+    playlist_id = playlist["id"]
 
+    parsed_response = client.user_playlist_add_tracks(USERNAME, playlist_id, track_uris)
+    return parsed_response #> {'snapshot_id': 'xzy123'}
 
 if __name__ == "__main__":
-    #get_springsteen_songs()
-    #get_token()
-    #get_playlists()
-    #playlist = find_or_create_playlist()
-    #print(playlist["id"])
 
-    add_track()
+    songs = get_springsteen_songs()
+    #print(songs[0])
+    ###songs[0]["id"] #> '7G7UNs17d0Grqk63M2MAwu'
+    ###songs[0]["uri"] #> 'spotify:track:7G7UNs17d0Grqk63M2MAwu'
+    ###songs[0]["name"] #> 'My Hometown - Springsteen on Broadway'
+    track_uris = [songs[0]["uri"]] #> spotify:track:7G7UNs17d0Grqk63M2MAwu"
+
+    #track_uris = ["spotify:track:4912tpbfCZEcSqPvmQVu1W"]
+
+    print("TRACKS:", track_uris)
+    parsed_response = add_tracks(track_uris)
+    print("ADDED TRACKS, SNAPSHOT:", parsed_response["snapshot_id"])
