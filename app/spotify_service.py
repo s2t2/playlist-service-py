@@ -13,6 +13,8 @@ REDIRECT_URL = os.environ.get("SPOTIPY_REDIRECT_URI", "OOPS")
 USERNAME = os.environ.get("SPOTIFY_USERNAME", "OOPS")
 AUTH_TOKEN = os.environ.get("SPOTIFY_AUTH_TOKEN", "OOPS")
 
+PLAYLIST_NAME = os.environ.get("SPOTIFY_PLAYLIST_NAME", "My Pandora Bookmarks III")
+
 # doesn't require user auth
 def get_springsteen_songs():
     client_credentials_manager = SpotifyClientCredentials() # implicitly uses SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET env vars!!
@@ -78,8 +80,6 @@ def get_playlists():
 # requires user auth token
 def find_or_create_playlist():
     playlists = get_playlists()
-
-    PLAYLIST_NAME = "My Pandora Bookmarks"
 
     if PLAYLIST_NAME in [p["name"] for p in playlists]:
         playlist = [p for p in playlists if p["name"] == PLAYLIST_NAME ][0]

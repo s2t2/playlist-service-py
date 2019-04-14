@@ -1,10 +1,13 @@
 
 
-from app.spotify_service import authenticated_client, add_tracks
-import spotipy
-
 import os
 import pytest
+import spotipy
+
+from app.spotify_service import PLAYLIST_NAME, authenticated_client, add_tracks
+
+def test_playlist_name():
+    assert PLAYLIST_NAME == "My Pandora Bookmarks III"
 
 CI_ENV = os.environ.get("CI", "OOPS") == "true" # expect default environment variable setting of "CI=true" on Travis CI, see: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
 SKIP_REASON = "to avoid issuing requests from the CI server"
