@@ -7,6 +7,7 @@ import spotipy
 from app.spotify_service import (
     USERNAME,
     PLAYLIST_NAME,
+    get_springsteen_songs,
     get_token,
     authenticated_client,
     find_or_create_playlist,
@@ -18,6 +19,17 @@ def test_playlist_name():
 
 CI_ENV = os.environ.get("CI", "OOPS") == "true" # expect default environment variable setting of "CI=true" on Travis CI, see: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
 SKIP_REASON = "to avoid issuing requests from the CI server"
+
+@pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
+def test_song_search():
+    songs = get_springsteen_songs()
+    song = songs[0]
+
+    assert len(songs) == 20
+    # FYI: this might change over time...
+    assert song["id"] == "7G7UNs17d0Grqk63M2MAwu"
+    assert song["name"] == "My Hometown - Springsteen on Broadway"
+    assert song["uri"] == "spotify:track:7G7UNs17d0Grqk63M2MAwu"
 
 @pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
 def test_get_token():

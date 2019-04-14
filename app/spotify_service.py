@@ -20,16 +20,8 @@ def get_springsteen_songs():
     client_credentials_manager = SpotifyClientCredentials() # implicitly uses SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET env vars!!
     client = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     search_term = "Springsteen on Broadway"
-    #print("---------------")
-    #print("SEARCH:", search_term)
     response = client.search(q=search_term, limit=20)
-    #print("---------------")
-    #print("RESPONSE:", type(response))
     songs = response["tracks"]["items"]
-    #print("---------------")
-    print(f"SONGS ({len(songs)}):")
-    for i, song in enumerate(songs):
-        print(f" {song['uri']} {song['name']}")
     return songs
 
 # prompts user to login to spotify and paste a callback url into the terminal
@@ -105,15 +97,12 @@ def add_tracks(track_uris):
 
 if __name__ == "__main__":
 
-    token = get_token()
-    quit()
-
     songs = get_springsteen_songs()
-    #print(songs[0])
-    ###songs[0]["id"] #> '7G7UNs17d0Grqk63M2MAwu'
-    ###songs[0]["uri"] #> 'spotify:track:7G7UNs17d0Grqk63M2MAwu'
-    ###songs[0]["name"] #> 'My Hometown - Springsteen on Broadway'
-    track_uris = [songs[0]["uri"]] #> spotify:track:7G7UNs17d0Grqk63M2MAwu"
+    print(f"SONGS ({len(songs)}):")
+    for i, song in enumerate(songs):
+        print(f" {song['uri']} {song['name']}")
+
+    track_uris = [songs[9]["uri"]]
 
     #track_uris = ["spotify:track:4912tpbfCZEcSqPvmQVu1W"]
 
