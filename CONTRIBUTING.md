@@ -40,6 +40,7 @@ Obtain your Pandora username and password, and store them in environment variabl
 
 Create a [Spotify Client application](https://developer.spotify.com/dashboard/applications/), and note its credentials, then store them in environment variables called `SPOTIPY_CLIENT_ID` and `SPOTIPY_CLIENT_SECRET`, respectively.
 
+Also follow this [Spotify User Authentication Guide](https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/packages/spotipy.md#user-authentication) to set environment variables `SPOTIPY_REDIRECT_URL` and `SPOTIFY_AUTH_TOKEN`.
 
 ## Usage
 
