@@ -9,6 +9,7 @@ from app.spotify_service import (
     PLAYLIST_NAME,
     get_token,
     authenticated_client,
+    find_or_create_playlist,
     add_tracks
 )
 
@@ -41,6 +42,12 @@ def test_authenticated_client():
     assert "search" in dir(client)
     assert "user_playlist_create" in dir(client)
     assert "user_playlist_add_tracks" in dir(client)
+
+@pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
+def test_find_or_create_playlist():
+    parsed_response = find_or_create_playlist()
+    assert isinstance(parsed_response, dict)
+    assert parsed_response["name"] == PLAYLIST_NAME
 
 @pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
 def test_add_track():
