@@ -63,38 +63,50 @@ def find_or_create_playlist():
         playlist = [p for p in playlists if p["name"] == PLAYLIST_NAME ][0]
         #playlist.keys() #> dict_keys(['collaborative', 'external_urls', 'href', 'id', 'images', 'name', 'owner', 'primary_color', 'public', 'snapshot_id', 'tracks', 'type', 'uri'])
         #print(f"FOUND PLAYLIST: '{playlist['name']}' ({playlist['id']})")
-        # count songs
     else:
         #print("PLAYLIST NOT FOUND")
         client = authenticated_client()
         playlist = client.user_playlist_create(user=USERNAME, name=PLAYLIST_NAME, public=False)
         #playlist.keys() #> dict_keys(['collaborative', 'description', 'external_urls', 'followers', 'href', 'id', 'images', 'name', 'owner', 'primary_color', 'public', 'snapshot_id', 'tracks', 'type', 'uri'])
         #print(f"CREATED PLAYLIST: '{playlist['name']}' ({playlist['id']})")
-        # count songs
-
     return playlist
 
-def add_tracks(track_uris):
+def add_tracks(playlist_id, track_uris):
     client = authenticated_client()
-
-    playlist = find_or_create_playlist()
-    print("PLAYLIST: ", playlist["id"], playlist["name"])
-    playlist_id = playlist["id"]
-
     parsed_response = client.user_playlist_add_tracks(USERNAME, playlist_id, track_uris)
     return parsed_response #> {'snapshot_id': 'xzy123'}
 
 if __name__ == "__main__":
 
-    songs = get_springsteen_songs()
-    print(f"SONGS ({len(songs)}):")
-    for i, song in enumerate(songs):
-        print(f" {song['uri']} {song['name']}")
+    #
+    # GET PLAYLIST
+    #
 
-    track_uris = [songs[9]["uri"]]
+    playlist = find_or_create_playlist()
+    print("PLAYLIST: ", playlist["id"], playlist["name"])
 
-    #track_uris = ["spotify:track:4912tpbfCZEcSqPvmQVu1W"]
+    playlist_id = playlist["id"] #> "2x64ZZ1u32oqgCkSH8eg2g"
 
-    print("TRACKS:", track_uris)
-    parsed_response = add_tracks(track_uris)
+    #
+    # GET TRACK(S)
+    #
+
+    tracks = get_springsteen_songs()
+    # TODO: accept user search term
+    # search_term = "My Favorite Song, by Artist XYZ"
+    # tracks = song_search(search_term)
+
+    print(f"TRACKS ({len(tracks)}):")
+    for i, trk in enumerate(tracks):
+        print(f" {trk['uri']} {trk['name']}")
+
+    track_uris = [tracks[0]["uri"]] #> ["spotify:track:4912tpbfCZEcSqPvmQVu1W"]
+
+    #
+    # ADD TRACK(S) TO PLAYLIST
+    #
+
+    parsed_response = add_tracks(playlist_id, track_uris)
     print("ADDED TRACKS, SNAPSHOT:", parsed_response["snapshot_id"])
+
+    # TODO: consider asking the user if they want to open the playlist in a browser (Y/N)

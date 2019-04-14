@@ -66,8 +66,11 @@ def test_find_or_create_playlist():
     assert parsed_response["name"] == PLAYLIST_NAME
 
 @pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
-def test_add_track():
+def test_add_tracks():
+    playlist = find_or_create_playlist()
+    playlist_id = playlist["id"]
+
     track_ids = ["spotify:track:4912tpbfCZEcSqPvmQVu1W"]
-    parsed_response = add_tracks(track_ids)
+    parsed_response = add_tracks(playlist_id, track_ids)
     assert isinstance(parsed_response, dict)
     assert isinstance(parsed_response["snapshot_id"], str)
