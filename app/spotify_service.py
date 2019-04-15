@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
 import spotipy.util as util
 
 load_dotenv() # load environment variables
@@ -76,7 +76,29 @@ def add_tracks(playlist_id, track_uris):
     parsed_response = client.user_playlist_add_tracks(USERNAME, playlist_id, track_uris)
     return parsed_response #> {'snapshot_id': 'xzy123'}
 
+
+def convert_code():
+    auth_code = "obtain this by parsing the code URL parameter of the callback url after the redirect"
+    #credentials_filepath = os.path.join(os.path.dirname(__file__), "..", "credentials", "spotify_user.json")
+    sp_oauth = SpotifyOAuth(
+        client_id=CLIENT_ID,
+        client_secret=CLIENT_SECRET,
+        redirect_uri=REDIRECT_URL,
+        scope=AUTH_SCOPE #,
+        #cache_path=credentials_filepath
+    )
+    token_info = sp_oauth.get_access_token(auth_code)
+    print(token_info["access_token"])
+
+    breakpoint()
+
 if __name__ == "__main__":
+
+    convert_code()
+
+
+    exit()
+
 
     #
     # GET PLAYLIST
