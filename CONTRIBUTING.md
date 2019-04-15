@@ -46,13 +46,13 @@ The first time you use the app via the command line, it will prompt you to login
 
 ## Usage
 
-List bookmarked songs on Pandora:
+List Pandora bookmarks:
 
 ```sh
 python app/pandora_service.py
 ```
 
-List songs in the "Pandora Bookmarks" playlist on Spotify:
+List songs in the corresponding Spotify playlist:
 
 ```sh
 python app/spotify_service.py
