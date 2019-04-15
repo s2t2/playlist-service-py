@@ -64,6 +64,12 @@ Add all Pandora bookmarks to the corresponding Spotify playlist:
 python app/sync_service.py
 ```
 
+Run web app:
+
+```sh
+FLASK_APP=app flask run
+```
+
 ## Testing
 
 Install the `pytest` package (first time only):
