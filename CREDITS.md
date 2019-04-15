@@ -27,12 +27,77 @@ FYI: to import the `pandora` module you may first have to import the `pydora` mo
   + https://developer.spotify.com/documentation/web-api/
   + https://developer.spotify.com/console/post-playlist-tracks/
   + https://developer.spotify.com/documentation/web-api/reference/playlists/add-tracks-to-playlist/
+  + https://developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/
+  + https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids
 
 ### The `spotipy` Package
 
   + https://github.com/plamere/spotipy
   + https://spotipy.readthedocs.io/en/latest/
   + https://github.com/s2t2/my-spotify-app-py/blob/master/list_songs.py
+  + https://spotipy.readthedocs.io/en/latest/#client-credentials-flow
+  + https://github.com/plamere/spotipy/blob/master/spotipy/client.py
+  + https://github.com/plamere/spotipy/blob/master/spotipy/util.py
+
+### Spotify Auth
+
+  + https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-flows
+  + https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+
+"This flow is suitable for long-running applications in which the user grants permission only once. It provides an access token that can be refreshed. Since the token exchange involves sending your secret key, perform this on a secure location, like a backend service, and not from a client such as a browser or from a mobile app."
+
+"Have your application request authorization (GET https://accounts.spotify.com/authorize)"
+
+  + https://spotipy.readthedocs.io/en/latest/#authorization-code-flow
+  + https://developer.spotify.com/documentation/general/guides/scopes/
+  + https://developer.spotify.com/documentation/general/guides/scopes/#playlist-read-private
+  + https://developer.spotify.com/documentation/general/guides/scopes/#playlist-modify-private
+  + `SpotipyOauth`: https://github.com/plamere/spotipy/blob/master/spotipy/oauth2.py#L93-L264
+
+
+One time method to get a token prompts user to login, then sends user to a redirect url and appends an auth code into the url params. The terminal asks for me to input the entire URL, and returns an access token.
+
+This also seems to add a file called `.cache-USERNAME` to the root directory of the repo. it looks like this:
+
+```json
+{
+    "access_token": "_____",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "refresh_token": "______",
+    "scope": "playlist-read-private",
+    "expires_at": 1554651631
+}
+```
+
+Moving it to "credentials/spotify_user.json" in case we need it later. And gitignoring it. Obviously.
+
+Here is the source of what's going on with that file, and how to customize its location:
+
+  + https://github.com/plamere/spotipy/blob/master/spotipy/oauth2.py#L123-L130
+  + https://github.com/plamere/spotipy/blob/master/spotipy/util.py#L9-L51
+
+Looks like scope can be a list, see:
+
+  + https://github.com/plamere/spotipy/blob/master/spotipy/oauth2.py#L225
+
+...
+
+Some code that might be worth trying in conjunction with a Flask app callback:
+
+```py
+def code_to_token(auth_code):
+    credentials_filepath = os.path.join(os.path.dirname(__file__), "..", "credentials", "spotify_user.json")
+    sp_oauth = oauth2.SpotifyOAuth(
+        client_id=CLIENT_ID,
+        client_secret=CLIENT_SECRET,
+        redirect_uri=REDIRECT_URL,
+        scope=AUTH_SCOPE,
+        cache_path=credentials_filepath
+    )
+    token_info = sp_oauth.get_access_token(auth_code)
+    return token_info["access_token"]
+```
 
 ## Pytest
 
