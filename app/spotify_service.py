@@ -82,7 +82,7 @@ if __name__ == "__main__":
     # GET PLAYLIST
     #
 
-    playlist = find_or_create_playlist()
+    playlist = find_or_create_playlist() # TODO: consider getting all playlists and asking the user to choose one
     print("PLAYLIST: ", playlist["id"], playlist["name"])
 
     playlist_id = playlist["id"] #> "2x64ZZ1u32oqgCkSH8eg2g"
