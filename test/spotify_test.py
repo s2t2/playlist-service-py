@@ -8,7 +8,7 @@ from app.spotify_service import (
     USERNAME,
     AUTH_SCOPE,
     PLAYLIST_NAME,
-    get_springsteen_songs,
+    song_search,
     get_token,
     authenticated_client,
     find_or_create_playlist,
@@ -26,7 +26,7 @@ SKIP_REASON = "to avoid issuing requests from the CI server"
 
 @pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
 def test_song_search():
-    songs = get_springsteen_songs()
+    songs = song_search("Springsteen on Broadway")
     song = songs[0]
 
     assert len(songs) == 20

@@ -17,13 +17,12 @@ AUTH_SCOPE = "playlist-read-private playlist-modify-private"
 PLAYLIST_NAME = os.environ.get("SPOTIFY_PLAYLIST_NAME", "My Pandora Bookmarks III")
 
 # doesn't require user auth
-def get_springsteen_songs():
+def song_search(search_term):
     client_credentials_manager = SpotifyClientCredentials() # implicitly uses SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET env vars!!
     client = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-    search_term = "Springsteen on Broadway"
     response = client.search(q=search_term, limit=20)
-    songs = response["tracks"]["items"]
-    return songs
+    tracks = response["tracks"]["items"]
+    return tracks
 
 # prompts user to login to spotify and paste a callback url into the terminal
 def get_token():
@@ -71,6 +70,7 @@ def find_or_create_playlist():
         #print(f"CREATED PLAYLIST: '{playlist['name']}' ({playlist['id']})")
     return playlist
 
+# requires user auth token
 def add_tracks(playlist_id, track_uris):
     client = authenticated_client()
     parsed_response = client.user_playlist_add_tracks(USERNAME, playlist_id, track_uris)
@@ -91,16 +91,23 @@ if __name__ == "__main__":
     # GET TRACK(S)
     #
 
-    tracks = get_springsteen_songs()
-    # TODO: accept user search term
-    # search_term = "My Favorite Song, by Artist XYZ"
-    # tracks = song_search(search_term)
+    search_term = input("Please specify a search term: ")
+    if not search_term:
+        search_term = "Springsteen on Broadway"
+    print("SEARCH TERM:", search_term)
+
+    tracks = song_search(search_term)
 
     print(f"TRACKS ({len(tracks)}):")
     for i, trk in enumerate(tracks):
         print(f" {trk['uri']} {trk['name']}")
 
-    track_uris = [tracks[0]["uri"]] #> ["spotify:track:4912tpbfCZEcSqPvmQVu1W"]
+    track_uri = input("Please choose a track, paste the URI and press enter: ")
+    if not track_uri:
+        track_uri = tracks[0]["uri"]
+    print("YOU CHOSE", track_uri)
+
+    track_uris = [track_uri] #> ["spotify:track:4912tpbfCZEcSqPvmQVu1W"]
 
     #
     # ADD TRACK(S) TO PLAYLIST
