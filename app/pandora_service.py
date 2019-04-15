@@ -26,22 +26,24 @@ def authenticated_client():
     login_response = client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
     return client
 
+def get_bookmarks():
+    client = authenticated_client()
+    response = client.get_bookmarks()
+    return response.songs
+
 if __name__ == "__main__":
 
     print("---------------------------")
     print("GETTING BOOKMARKS...")
 
-    client = authenticated_client()
+    songs = get_bookmarks()
 
-    bookmarks_response = client.get_bookmarks()
-    print(type(bookmarks_response))
-
-    print(f"FOUND {len(bookmarks_response.songs)} BOOKMARKS:")
-    for song in bookmarks_response.songs:
+    print(f"FOUND {len(songs)} BOOKMARKS:")
+    for song in songs:
         song_info = {
             "bookmarked_on": song.date_created.strftime("%Y-%m-%d"),
             "artist": song.artist_name,
             "title": song.song_name,
-            "album": song.album_name
+            #"album": song.album_name
         }
         print(song_info)

@@ -58,6 +58,12 @@ List songs in the corresponding Spotify playlist:
 python app/spotify_service.py
 ```
 
+Add all Pandora bookmarks to the corresponding Spotify playlist:
+
+```sh
+python app/sync_service.py
+```
+
 ## Testing
 
 Install the `pytest` package (first time only):
