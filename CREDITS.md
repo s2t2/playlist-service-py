@@ -83,6 +83,8 @@ Looks like scope can be a list, see:
 
 ...
 
+#### Handling Callbacks
+
 Some code that might be worth trying in conjunction with a Flask app callback:
 
 ```py
@@ -98,6 +100,34 @@ def code_to_token(auth_code):
     token_info = sp_oauth.get_access_token(auth_code)
     return token_info["access_token"]
 ```
+
+
+  + https://stackoverflow.com/questions/26726165/python-spotify-oauth-flow
+  + https://github.com/mari-linhares/spotify-flask
+  + https://stackoverflow.com/questions/25711711/spotipy-authorization-code-flow
+  + https://docs.authlib.org/en/latest/
+  + https://github.com/drshrey/spotify-flask-auth-example
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Pytest
 

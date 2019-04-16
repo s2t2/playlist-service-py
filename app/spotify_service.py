@@ -16,6 +16,16 @@ AUTH_SCOPE = "playlist-read-private playlist-modify-private"
 
 PLAYLIST_NAME = os.environ.get("SPOTIFY_PLAYLIST_NAME", "My Pandora Bookmarks III")
 
+def client_auth():
+    credentials_filepath = os.path.join(os.path.dirname(__file__), "..", "credentials", "spotify_user.json")
+    return SpotifyOAuth(
+        client_id=CLIENT_ID,
+        client_secret=CLIENT_SECRET,
+        redirect_uri=REDIRECT_URL,
+        scope=AUTH_SCOPE,
+        cache_path=credentials_filepath
+    )
+
 # doesn't require user auth
 def song_search(search_term):
     client_credentials_manager = SpotifyClientCredentials() # implicitly uses SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET env vars!!
@@ -76,25 +86,69 @@ def add_tracks(playlist_id, track_uris):
     parsed_response = client.user_playlist_add_tracks(USERNAME, playlist_id, track_uris)
     return parsed_response #> {'snapshot_id': 'xzy123'}
 
+if __name__ == "__main__":
 
-def convert_code():
-    auth_code = "obtain this by parsing the code URL parameter of the callback url after the redirect"
+
+
+
+
+
+
+
+
     #credentials_filepath = os.path.join(os.path.dirname(__file__), "..", "credentials", "spotify_user.json")
-    sp_oauth = SpotifyOAuth(
-        client_id=CLIENT_ID,
-        client_secret=CLIENT_SECRET,
-        redirect_uri=REDIRECT_URL,
-        scope=AUTH_SCOPE #,
-        #cache_path=credentials_filepath
-    )
-    token_info = sp_oauth.get_access_token(auth_code)
-    print(token_info["access_token"])
+    #client_auth = SpotifyOAuth(
+    #    client_id=CLIENT_ID,
+    #    client_secret=CLIENT_SECRET,
+    #    redirect_uri=REDIRECT_URL,
+    #    scope=AUTH_SCOPE,
+    #    cache_path=credentials_filepath
+    #)
+    # client_auth.OAUTH_AUTHORIZE_URL #> 'https://accounts.spotify.com/authorize'
+    # client_auth.OAUTH_TOKEN_URL #> 'https://accounts.spotify.com/api/token'
+
+    # client_auth.get_authorize_url() #> 'https://accounts.spotify.com/authorize?client_id=_____&response_type=code&redirect_uri=________&scope=playlist-modify-private+playlist-read-private'
+
+    # client_auth.get_cached_token() #> None
+    # client_auth.refresh_access_token()
+    # client_auth.parse_response_code()
+
+    #auth_code = "xyz"
+    #token_info = client_auth.get_access_token(auth_code)
+    #print(token_info["access_token"])
 
     breakpoint()
 
-if __name__ == "__main__":
 
-    convert_code()
+
+
+    quit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     exit()
