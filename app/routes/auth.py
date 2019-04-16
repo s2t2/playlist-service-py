@@ -26,13 +26,14 @@ def spotify_callback(code=None):
 
     if "code" in request.args:
         code = request.args["code"]
-        message = f"CODE: {code}"
+        print("CODE:", code)
+
+        token_info = client_auth().get_access_token(code)
+        print("TOKEN INFO:", token_info)
+        token = token_info["access_token"]
+        print("ACCESS TOKEN:", token)
+        return token
     else:
         message = "OOPS, UNABLE TO GET CODE"
-
-    #print(message)
-    #token_info = client_auth.get_access_token(code)
-    #token = token_info["access_token"]
-    #print("ACCESS TOKEN:", token)
-
-    return message
+        print(message)
+        return message
