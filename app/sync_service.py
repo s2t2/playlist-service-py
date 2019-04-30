@@ -39,8 +39,8 @@ if __name__ == "__main__":
 
             # ADD SONG TO PLAYLIST
 
-            #parsed_response = add_tracks(playlist_id, track_ids)
-            #print("... ADDED TRACK, SNAPSHOT:", parsed_response["snapshot_id"])
+            parsed_response = add_tracks(playlist_id, track_ids)
+            print(f"ADDED! SNAPSHOT:", parsed_response["snapshot_id"])
 
         except IndexError as e:
             print("N/A - NONE FOUND")
