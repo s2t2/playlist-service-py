@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
 import spotipy.util as util
 
 load_dotenv() # load environment variables
@@ -15,6 +15,16 @@ AUTH_SCOPE = "playlist-read-private playlist-modify-private"
 #AUTH_TOKEN = os.environ.get("SPOTIFY_AUTH_TOKEN", "OOPS")
 
 PLAYLIST_NAME = os.environ.get("SPOTIFY_PLAYLIST_NAME", "My Pandora Bookmarks III")
+
+def client_auth():
+    credentials_filepath = os.path.join(os.path.dirname(__file__), "..", "credentials", "spotify_user.json")
+    return SpotifyOAuth(
+        client_id=CLIENT_ID,
+        client_secret=CLIENT_SECRET,
+        redirect_uri=REDIRECT_URL,
+        scope=AUTH_SCOPE,
+        cache_path=credentials_filepath
+    )
 
 # doesn't require user auth
 def song_search(search_term):
@@ -77,6 +87,72 @@ def add_tracks(playlist_id, track_uris):
     return parsed_response #> {'snapshot_id': 'xzy123'}
 
 if __name__ == "__main__":
+
+
+
+
+
+
+
+
+
+    #credentials_filepath = os.path.join(os.path.dirname(__file__), "..", "credentials", "spotify_user.json")
+    #client_auth = SpotifyOAuth(
+    #    client_id=CLIENT_ID,
+    #    client_secret=CLIENT_SECRET,
+    #    redirect_uri=REDIRECT_URL,
+    #    scope=AUTH_SCOPE,
+    #    cache_path=credentials_filepath
+    #)
+    # client_auth.OAUTH_AUTHORIZE_URL #> 'https://accounts.spotify.com/authorize'
+    # client_auth.OAUTH_TOKEN_URL #> 'https://accounts.spotify.com/api/token'
+
+    # client_auth.get_authorize_url() #> 'https://accounts.spotify.com/authorize?client_id=_____&response_type=code&redirect_uri=________&scope=playlist-modify-private+playlist-read-private'
+
+    # client_auth.get_cached_token() #> None
+    # client_auth.refresh_access_token()
+    # client_auth.parse_response_code()
+
+    #auth_code = "xyz"
+    #token_info = client_auth.get_access_token(auth_code)
+    #print(token_info["access_token"])
+
+    breakpoint()
+
+
+
+
+    quit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    exit()
+
 
     #
     # GET PLAYLIST
