@@ -24,17 +24,17 @@ CLIENT_SETTINGS = {
 class PandoraService():
 
     def __init__(self):
-        self.client = self.__authenticate__()
+        self.client = cb.SettingsDictBuilder(CLIENT_SETTINGS).build()
+        print("CLIENT:", self.client)
 
-    def __authenticate__(self):
-        client = cb.SettingsDictBuilder(CLIENT_SETTINGS).build()
-        print("PANDORA API CLIENT:", client)
-        login_response = client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
-        print("LOGIN RESPONSE:")
-        pprint(login_response)
-        return client
+    def authenticate(self):
+        login_response = self.client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
+        print("LOGIN...")
+        #pprint(login_response)
+        return login_response
 
     def get_bookmarked_songs(self):
+        if not (self.client.username and self.client.password): self.authenticate()
         response = self.client.get_bookmarks()
         print("BOOKMARKS RESPONSE:", type(response))
         return response.songs
