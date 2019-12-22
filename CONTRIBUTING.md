@@ -64,6 +64,14 @@ Add all Pandora bookmarks to the corresponding Spotify playlist:
 python -m app.sync_service
 ```
 
+### Exporting to CSV
+
+Export your pandora bookmarks to "data/exports/pandora/bookmarks.csv":
+
+```sh
+python -m app.exports.pandora.bookmarks
+```
+
 ## Testing
 
 Install the `pytest` package (first time only):

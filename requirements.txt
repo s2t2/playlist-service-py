@@ -1,3 +1,4 @@
 python-dotenv
 pydora
 spotipy
+pandas
