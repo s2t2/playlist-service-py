@@ -4,36 +4,32 @@ import os
 import pytest
 import spotipy
 
-from app.spotify_service import (
-    USERNAME,
-    AUTH_SCOPE,
-    PLAYLIST_NAME,
+from app.spotify_service import (CLIENT_ID, CLIENT_SECRET, USERNAME, PLAYLIST_NAME, AUTH_SCOPE, REDIRECT_URL,
     song_search,
     get_token,
     authenticated_client,
     find_or_create_playlist,
     add_tracks
 )
+from conftest import CI_ENV, SKIP_REASON
 
-def test_auth_scope():
+def test_config():
+    assert CLIENT_ID is not "OOPS"
+    assert CLIENT_SECRET is not "OOPS"
+    assert REDIRECT_URL is not "OOPS"
+    assert USERNAME is not "OOPS"
     assert AUTH_SCOPE == "playlist-read-private playlist-modify-private"
-
-def test_playlist_name():
-    assert PLAYLIST_NAME == "My Pandora Bookmarks III"
-
-CI_ENV = os.environ.get("CI", "OOPS") == "true" # expect default environment variable setting of "CI=true" on Travis CI, see: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
-SKIP_REASON = "to avoid issuing requests from the CI server"
+    assert PLAYLIST_NAME is not "OOPS"
 
 @pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
 def test_song_search():
     songs = song_search("Springsteen on Broadway")
-    song = songs[0]
-
     assert len(songs) == 20
-    # FYI: this might change over time...
-    assert song["id"] == "7G7UNs17d0Grqk63M2MAwu"
-    assert song["name"] == "My Hometown - Springsteen on Broadway"
-    assert song["uri"] == "spotify:track:7G7UNs17d0Grqk63M2MAwu"
+
+    song = songs[0]
+    assert "id" in song.keys() # song["id"] == "7G7UNs17d0Grqk63M2MAwu"
+    assert "name" in song.keys() # song["name"] == "My Hometown - Springsteen on Broadway"
+    assert "uri" in song.keys() # song["uri"] == "spotify:track:7G7UNs17d0Grqk63M2MAwu"
 
 @pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
 def test_get_token():

@@ -14,7 +14,7 @@ USERNAME = os.environ.get("SPOTIFY_USERNAME", "OOPS")
 AUTH_SCOPE = "playlist-read-private playlist-modify-private"
 #AUTH_TOKEN = os.environ.get("SPOTIFY_AUTH_TOKEN", "OOPS")
 
-PLAYLIST_NAME = os.environ.get("SPOTIFY_PLAYLIST_NAME", "My Pandora Bookmarks III")
+PLAYLIST_NAME = os.environ.get("SPOTIFY_PLAYLIST_NAME", "OOPS")
 
 # doesn't require user auth
 def song_search(search_term):

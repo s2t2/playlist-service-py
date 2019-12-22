@@ -10,7 +10,8 @@ import pytest
 from app.pandora_service import PandoraService, CLIENT_SETTINGS, PANDORA_USERNAME, PANDORA_PASSWORD
 from conftest import CI_ENV, SKIP_REASON
 
-def test_configured_client(pandora_service):
+def test_configured_client():
+    pandora_service = PandoraService(login=False)
     # it should be a Pandora API client:
     client = pandora_service.client
     assert isinstance(client, APIClient)
@@ -28,10 +29,10 @@ def test_authenticated_client(pandora_service):
     # it should be a Pandora API client:
     client = pandora_service.client
     assert isinstance(client, APIClient)
-    assert client.username == None
-    assert client.password == None
-
-    pandora_service.authenticate()
+    #assert client.username == None
+    #assert client.password == None
+    #
+    #pandora_service.authenticate()
 
     # it should be authenticated with user credentials:
     assert client.username == PANDORA_USERNAME
