@@ -16,7 +16,8 @@ def test_config():
     assert PLAYLIST_NAME is not "OOPS"
 
 @pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
-def test_song_search(spotify_service):
+def test_song_search():
+    spotify_service = SpotifyService(login=False)
     songs = spotify_service.song_search("Springsteen on Broadway")
     assert len(songs) == 20
 
