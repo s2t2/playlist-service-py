@@ -7,6 +7,7 @@ import spotipy
 from app.spotify_service import SpotifyService, CLIENT_ID, CLIENT_SECRET, USERNAME, PLAYLIST_NAME, AUTH_SCOPE, REDIRECT_URL
 from conftest import CI_ENV, SKIP_REASON
 
+@pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
 def test_config():
     assert CLIENT_ID is not "OOPS"
     assert CLIENT_SECRET is not "OOPS"
