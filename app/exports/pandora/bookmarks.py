@@ -1,11 +1,10 @@
 
 import os
-from operator import itemgetter
 import pandas
 
+from app import EXPORTS_DIR
 from app.pandora_service import PandoraService
 
-EXPORTS_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "..", "data", "exports")
 CSV_FILEPATH = os.path.join(EXPORTS_DIR, "pandora", "bookmarks.csv")
 
 def to_dict(bookmark):
