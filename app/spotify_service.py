@@ -17,6 +17,7 @@ AUTH_SCOPE = "playlist-read-private playlist-modify-private"
 PLAYLIST_NAME = os.environ.get("SPOTIFY_PLAYLIST_NAME", "OOPS")
 
 class SpotifyService(object):
+    """Uses the Spotify API to act on behalf of the authenticated user."""
 
     def __init__(self, login=True):
         self.public_client = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials()) # implicitly uses SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET env vars!!

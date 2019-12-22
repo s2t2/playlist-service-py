@@ -1,6 +1,4 @@
 
-#from app.pandora_service import PandoraService
-
 import os
 from pprint import pprint
 
@@ -22,16 +20,16 @@ CLIENT_SETTINGS = {
 } # FYI: these are generic public device settings (not personal or private), see: https://6xq.net/pandora-apidoc/json/partners/#partners
 
 class PandoraService():
+    """Uses the unofficial Pandora API to act on behalf of the authenticated user."""
 
     def __init__(self, login=True):
         self.client = cb.SettingsDictBuilder(CLIENT_SETTINGS).build()
-        print("CLIENT:", self.client)
         if login:
             self.client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
 
     def get_bookmarked_songs(self):
+        """Fetches the user's bookmarked songs."""
         response = self.client.get_bookmarks()
-        print("BOOKMARKS RESPONSE:", type(response))
         return response.songs
 
 if __name__ == "__main__":
