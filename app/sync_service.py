@@ -1,6 +1,6 @@
 
-from pandora_service import get_bookmarks
-from spotify_service import find_or_create_playlist, song_search, add_tracks
+from app.pandora_service import PandoraService
+from app.spotify_service import find_or_create_playlist, song_search, add_tracks
 
 if __name__ == "__main__":
 
@@ -14,7 +14,9 @@ if __name__ == "__main__":
 
     # LIST BOOKMARKED SONGS
 
-    songs = get_bookmarks()
+    pandora_service = PandoraService()
+
+    songs = pandora_service.get_bookmarked_songs()
     print("--------------------------------")
     print(f"BOOKMARKS ({len(songs)}):")
     for song in songs:
