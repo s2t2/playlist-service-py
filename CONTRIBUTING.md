@@ -49,19 +49,19 @@ The first time you use the app via the command line, it will prompt you to login
 List Pandora bookmarks:
 
 ```sh
-python app/pandora_service.py
+python -m app.pandora_service
 ```
 
 List songs in the corresponding Spotify playlist:
 
 ```sh
-python app/spotify_service.py
+python -m app.spotify_service
 ```
 
 Add all Pandora bookmarks to the corresponding Spotify playlist:
 
 ```sh
-python app/sync_service.py
+python -m app.sync_service
 ```
 
 ## Testing
