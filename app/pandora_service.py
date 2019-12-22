@@ -1,5 +1,7 @@
 
 import os
+from pprint import pprint
+
 from dotenv import load_dotenv
 import pydora
 import pandora.clientbuilder as cb
@@ -17,28 +19,25 @@ CLIENT_SETTINGS = {
     "DEVICE": "android-generic"
 } # FYI: these are generic public device settings (not personal or private), see: https://6xq.net/pandora-apidoc/json/partners/#partners
 
-def configured_client():
-    client = cb.SettingsDictBuilder(CLIENT_SETTINGS).build()
-    return client
+class PandoraService():
+    """Uses the unofficial Pandora API to act on behalf of the authenticated user."""
 
-def authenticated_client():
-    client = configured_client()
-    login_response = client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
-    return client
+    def __init__(self, login=True):
+        self.client = cb.SettingsDictBuilder(CLIENT_SETTINGS).build()
+        if login:
+            self.client.login(PANDORA_USERNAME, PANDORA_PASSWORD)
 
-def get_bookmarks():
-    client = authenticated_client()
-    response = client.get_bookmarks()
-    return response.songs
+    def get_bookmarked_songs(self):
+        """Fetches the user's bookmarked songs."""
+        response = self.client.get_bookmarks()
+        return response.songs
 
 if __name__ == "__main__":
 
-    print("---------------------------")
-    print("GETTING BOOKMARKS...")
+    service = PandoraService()
 
-    songs = get_bookmarks()
-
-    print(f"FOUND {len(songs)} BOOKMARKS:")
+    songs = service.get_bookmarked_songs()
+    #print(f"MY BOOKMARKED SONGS {len(songs)}:")
     for song in songs:
         song_info = {
             "bookmarked_on": song.date_created.strftime("%Y-%m-%d"),

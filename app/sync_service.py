@@ -1,12 +1,14 @@
 
-from pandora_service import get_bookmarks
-from spotify_service import find_or_create_playlist, song_search, add_tracks
+from app.pandora_service import PandoraService
+from app.spotify_service import SpotifyService
 
 if __name__ == "__main__":
 
+    spotify_service = SpotifyService()
+
     # RESET PLAYLIST
 
-    playlist = find_or_create_playlist() # TODO: destroy_and_create_playlist()
+    playlist = spotify_service.find_or_create_playlist() # TODO: destroy_and_create_playlist()
     print("--------------------------------")
     print("PLAYLIST: ", playlist["id"], playlist["name"])
 
@@ -14,7 +16,9 @@ if __name__ == "__main__":
 
     # LIST BOOKMARKED SONGS
 
-    songs = get_bookmarks()
+    pandora_service = PandoraService()
+
+    songs = pandora_service.get_bookmarked_songs()
     print("--------------------------------")
     print(f"BOOKMARKS ({len(songs)}):")
     for song in songs:
@@ -25,7 +29,7 @@ if __name__ == "__main__":
         print("--------------------------------")
         print(f"SONG SEARCH TERM: '{search_term}'")
 
-        tracks = song_search(search_term)
+        tracks = spotify_service.song_search(search_term)
         print(f"SEARCH RESULTS ({len(tracks)}):")
 
         for track in tracks:
@@ -39,7 +43,7 @@ if __name__ == "__main__":
 
             # ADD SONG TO PLAYLIST
 
-            parsed_response = add_tracks(playlist_id, track_ids)
+            parsed_response = spotify_service.add_tracks(playlist_id, track_ids)
             print(f"ADDED! SNAPSHOT:", parsed_response["snapshot_id"])
 
         except IndexError as e:
