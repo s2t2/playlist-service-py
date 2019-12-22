@@ -18,7 +18,7 @@ cd playlist-service-py
 Create a virtual environment called "playlist-env" and activate it:
 
 ```sh
-conda create -n playlist-env
+conda create -n playlist-env python=3.7
 conda activate playlist-env
 ```
 
