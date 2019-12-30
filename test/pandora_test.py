@@ -1,13 +1,13 @@
 
+import pytest
+
 from datetime import datetime
-from dotenv import load_dotenv
 import pydora
 from pandora.client import APIClient
 from pandora.models.bookmark import Bookmark
 
-import pytest
-
 from app.pandora_service import PandoraService, CLIENT_SETTINGS, PANDORA_USERNAME, PANDORA_PASSWORD
+
 from conftest import CI_ENV, SKIP_REASON
 
 def test_configured_client():

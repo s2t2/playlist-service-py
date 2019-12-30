@@ -25,7 +25,8 @@ class SpotifyService(object):
             self.username = USERNAME
             self.auth_scope = AUTH_SCOPE
             self.client = spotipy.Spotify(auth=self.get_token())
-            self.playlist_name = PLAYLIST_NAME
+            #self.playlist_name = PLAYLIST_NAME
+            self.playlists = None
 
     def song_search(self, search_term):
         """Search for songs matching a given term. Doesn't require user auth."""
@@ -43,37 +44,56 @@ class SpotifyService(object):
 
     def get_playlists(self):
         """Get the authenticated user's playlists. Requires user auth token."""
-        playlists = []
-        response = self.client.current_user_playlists()
-        while response:
-            #print(type(response)) #> dict
-            for i, playlist in enumerate(response['items']):
-                #print(f"{i + 1 + response['offset']} {playlist['uri']} {playlist['name']}")
-                playlists.append(playlist)
-            if response["next"]:
-                response = self.client.next(response)
-            else:
-                response = None
-        return playlists
+        if self.playlists == None:
+            self.playlists = []
+            response = self.client.current_user_playlists()
+            while response:
+                #print(type(response)) #> dict
+                for i, playlist in enumerate(response['items']):
+                    #print(f"{i + 1 + response['offset']} {playlist['uri']} {playlist['name']}")
+                    self.playlists.append(playlist)
+                if response["next"]:
+                    response = self.client.next(response)
+                else:
+                    response = None
+        return self.playlists
 
-    def find_or_create_playlist(self):
+    def get_playlist(self, playlist_name=PLAYLIST_NAME):
+        """Find the specified playlist. Requires user auth token."""
+        try:
+            playlist = [p for p in self.get_playlists() if p["name"] == playlist_name][0]
+        except IndexError as err:
+            playlist = None
+        return playlist
+
+    def find_or_create_playlist(self, playlist_name=PLAYLIST_NAME):
         """Find or create the specified playlist. Requires user auth token."""
-        playlists = self.get_playlists()
-
-        if self.playlist_name in [p["name"] for p in playlists]:
-            playlist = [p for p in playlists if p["name"] == self.playlist_name ][0]
+        playlist = self.get_playlist(playlist_name)
+        if playlist:
             #playlist.keys() #> dict_keys(['collaborative', 'external_urls', 'href', 'id', 'images', 'name', 'owner', 'primary_color', 'public', 'snapshot_id', 'tracks', 'type', 'uri'])
             #print(f"FOUND PLAYLIST: '{playlist['name']}' ({playlist['id']})")
+            pass
         else:
             #print("PLAYLIST NOT FOUND")
-            playlist = self.client.user_playlist_create(user=self.username, name=self.playlist_name, public=False)
+            playlist = self.client.user_playlist_create(user=self.username, name=playlist_name, public=False)
             #playlist.keys() #> dict_keys(['collaborative', 'description', 'external_urls', 'followers', 'href', 'id', 'images', 'name', 'owner', 'primary_color', 'public', 'snapshot_id', 'tracks', 'type', 'uri'])
             #print(f"CREATED PLAYLIST: '{playlist['name']}' ({playlist['id']})")
         return playlist
 
-    def add_tracks(self, playlist_id, track_uris):
+    def get_tracks(self, playlist_id, user_id=USERNAME):
+        print("GETTING TRACKS...")
+        tracks = []
+        response = self.client.user_playlist_tracks(user_id, playlist_id) # fields="href, items, next"
+        tracks.extend(response["items"])
+        while response["next"]:
+            print("... NEXT PAGE...")
+            response = self.client.next(response)
+            tracks.extend(response["items"])
+        return tracks
+
+    def add_tracks(self, playlist_id, track_uris, user_id=USERNAME):
         """Add tracks to a given playlist. Requires user auth token."""
-        parsed_response = self.client.user_playlist_add_tracks(self.username, playlist_id, track_uris)
+        parsed_response = self.client.user_playlist_add_tracks(user_id, playlist_id, track_uris)
         return parsed_response #> {'snapshot_id': 'xzy123'}
 
 if __name__ == "__main__":
