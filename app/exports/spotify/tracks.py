@@ -8,11 +8,11 @@ from app.spotify_service import SpotifyService
 
 CSV_FILEPATH = os.path.join(EXPORTS_DIR, "spotify", "tracks.csv")
 
-def to_row(result):
-    track = result["track"]
+def to_row(parsed_response):
+    """Param: parsed_response (dict)"""
+    track = parsed_response["track"]
     album = track["album"]
     artist = track["artists"][0] # there can be many artists per track
-
     return {
         "album_id": album["id"],
         "album_name": album["name"],
@@ -29,6 +29,7 @@ def to_row(result):
     }
 
 def row_sort(row):
+    """Param: row (dict)"""
     return [row["artist_name"], row["album_name"], row["name"]]
 
 if __name__ == "__main__":

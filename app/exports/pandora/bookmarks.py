@@ -8,9 +8,7 @@ from app.pandora_service import PandoraService
 CSV_FILEPATH = os.path.join(EXPORTS_DIR, "pandora", "bookmarks.csv")
 
 def to_row(bookmark):
-    """
-    bookmark (pandora.models.bookmark.Bookmark)
-    """
+    """Param: bookmark (pandora.models.bookmark.Bookmark)"""
     return {
         "artist_name": bookmark.artist_name,
         "album_name": bookmark.album_name,
@@ -19,11 +17,9 @@ def to_row(bookmark):
         "date_created": bookmark.date_created,
     }
 
-def bookmark_sort(bookmark_attrs):
-    """
-    bookmark_attrs (dict)
-    """
-    return [bookmark_attrs["artist_name"], bookmark_attrs["album_name"], bookmark_attrs["song_name"]]
+def row_sort(row):
+    """Param: row (dict)"""
+    return [row["artist_name"], row["album_name"], row["song_name"]]
 
 if __name__ == "__main__":
 
@@ -31,7 +27,7 @@ if __name__ == "__main__":
 
     bookmarks = service.get_bookmarked_songs()
     data = [to_row(bookmark) for bookmark in bookmarks]
-    data = sorted(data, key=bookmark_sort)
+    data = sorted(data, key=row_sort)
 
     df = pandas.DataFrame(data)
     df.index.rename("id", inplace=True) # assigns a column label "id" for the index column
