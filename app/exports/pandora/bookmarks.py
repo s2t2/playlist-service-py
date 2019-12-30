@@ -27,8 +27,6 @@ def bookmark_sort(bookmark_attrs):
 
 if __name__ == "__main__":
 
-    print("EXPORTING PANDORA BOOKMARKS TO CSV...", os.path.abspath(CSV_FILEPATH))
-
     service = PandoraService()
 
     bookmarks = service.get_bookmarked_songs()
@@ -38,5 +36,6 @@ if __name__ == "__main__":
     df = pandas.DataFrame(data)
     df.index.rename("id", inplace=True) # assigns a column label "id" for the index column
     df.index += 1 # starts ids at 1 instead of 0
+    print("EXPORTING PANDORA BOOKMARKS TO CSV...", os.path.abspath(CSV_FILEPATH))
     print(df.head())
     df.to_csv(CSV_FILEPATH)
