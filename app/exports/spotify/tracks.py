@@ -47,9 +47,10 @@ if __name__ == "__main__":
         pprint([p["name"] for p in service.playlists])
 
     default_playlist_name = "Your Top Songs 2019"
-    playlist_name = input(f"Please enter a playlist name (default: '{default_playlist_name}'): ") or default_playlist_name # handles empty strings ... ("" or "hello") --> "hello"
+    playlist_name = input(f"Please enter a playlist name (default: '{default_playlist_name}'): ") \
+        or default_playlist_name # handles empty strings ... ("" or "hello") --> "hello"
 
-    playlist = service.get_playlist(playlist_name or default_playlist_name)
+    playlist = service.get_playlist(playlist_name)
 
     if playlist:
         tracks = service.get_tracks(user_id=playlist["owner"]["id"], playlist_id=playlist["id"])
