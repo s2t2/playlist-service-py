@@ -7,7 +7,7 @@ from app.pandora_service import PandoraService
 
 CSV_FILEPATH = os.path.join(EXPORTS_DIR, "pandora", "bookmarks.csv")
 
-def to_dict(bookmark):
+def to_row(bookmark):
     """
     bookmark (pandora.models.bookmark.Bookmark)
     """
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     service = PandoraService()
 
     bookmarks = service.get_bookmarked_songs()
-    data = [to_dict(bookmark) for bookmark in bookmarks]
+    data = [to_row(bookmark) for bookmark in bookmarks]
     data = sorted(data, key=bookmark_sort)
 
     df = pandas.DataFrame(data)
