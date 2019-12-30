@@ -80,9 +80,20 @@ class SpotifyService(object):
             #print(f"CREATED PLAYLIST: '{playlist['name']}' ({playlist['id']})")
         return playlist
 
-    def add_tracks(self, playlist_id, track_uris):
+    def get_tracks(self, playlist_id, user_id=USERNAME):
+        print("GETTING TRACKS...")
+        tracks = []
+        response = self.client.user_playlist_tracks(user_id, playlist_id) # fields="href, items, next"
+        tracks.extend(response["items"])
+        while response["next"]:
+            print("... NEXT PAGE...")
+            response = self.client.next(response)
+            tracks.extend(response["items"])
+        return tracks
+
+    def add_tracks(self, playlist_id, track_uris, username=USERNAME):
         """Add tracks to a given playlist. Requires user auth token."""
-        parsed_response = self.client.user_playlist_add_tracks(self.username, playlist_id, track_uris)
+        parsed_response = self.client.user_playlist_add_tracks(username, playlist_id, track_uris)
         return parsed_response #> {'snapshot_id': 'xzy123'}
 
 if __name__ == "__main__":

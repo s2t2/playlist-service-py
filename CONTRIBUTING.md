@@ -72,6 +72,12 @@ Export your pandora bookmarks to "data/exports/pandora/bookmarks.csv":
 python -m app.exports.pandora.bookmarks
 ```
 
+Export tracks from your spotify playlist to "data/exports/spotify/tracks.csv":
+
+```sh
+python -m app.exports.spotify.tracks
+```
+
 ## Testing
 
 Install the `pytest` package (first time only):
